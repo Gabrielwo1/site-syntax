@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
-/* ── tokens ────────────────────────────────────────────── */
 :root{
   --bg-0:oklch(0.145 0.008 168);--bg-1:oklch(0.183 0.010 168);
   --bg-2:oklch(0.223 0.012 168);--bg-3:oklch(0.275 0.013 168);
@@ -20,27 +19,24 @@
   --blue:oklch(0.72 0.150 244);--pink:oklch(0.73 0.170 352);
   --red:oklch(0.65 0.18 22);--red-soft:color-mix(in oklch,var(--red) 18%,transparent);
   --fg:oklch(0.97 0.004 168);--muted:oklch(0.72 0.010 168);--faint:oklch(0.55 0.010 168);
-  --font:  'Space Grotesk',system-ui,sans-serif;
-  --mono: 'JetBrains Mono',ui-monospace,monospace;
+  --font:'Space Grotesk',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
   --r:12px;--ease:cubic-bezier(.22,.61,.36,1);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-text-size-adjust:100%;}
-body{background:var(--bg-0);color:var(--fg);font-family:var(--font);
-  -webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden;}
-a{color:inherit;text-decoration:none;}
-img{display:block;max-width:100%;}
+body{background:var(--bg-0);color:var(--fg);font-family:var(--font);-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}img{display:block;max-width:100%;}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:none;}
 input,textarea,select{font:inherit;color:inherit;}
 ::selection{background:var(--green-soft);}
 
-/* ── layout ─────────────────────────────────────────────── */
 .page-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(700px 500px at 80% -10%,color-mix(in oklch,var(--green) 10%,transparent),transparent 60%),
     radial-gradient(500px 400px at 5% 15%,color-mix(in oklch,var(--violet) 7%,transparent),transparent 55%);}
 #app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100dvh;}
 
-/* ── topbar ─────────────────────────────────────────────── */
+/* topbar */
 .topbar{display:flex;align-items:center;gap:16px;padding:0 clamp(16px,4vw,40px);height:58px;
   border-bottom:1px solid var(--line-soft);
   background:color-mix(in oklch,var(--bg-1) 80%,transparent);backdrop-filter:blur(16px);
@@ -51,13 +47,13 @@ input,textarea,select{font:inherit;color:inherit;}
 .topbar .spacer{flex:1;}
 .topbar .user-email{font-size:13px;color:var(--muted);font-family:var(--mono);}
 
-/* ── main area ──────────────────────────────────────────── */
+/* main */
 .main{flex:1;padding:clamp(24px,4vw,48px) clamp(16px,4vw,40px);}
 .section-header{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px;}
 .section-header h1{font-size:22px;font-weight:600;letter-spacing:-.02em;}
 .section-header p{color:var(--muted);font-size:14px;margin-top:4px;}
 
-/* ── buttons ─────────────────────────────────────────────── */
+/* buttons */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
   font-weight:600;font-size:14px;border:1px solid transparent;transition:.2s var(--ease);white-space:nowrap;cursor:pointer;}
 .btn-primary{background:var(--green);color:oklch(0.18 0.03 153);box-shadow:0 4px 20px -6px var(--green);}
@@ -70,7 +66,7 @@ input,textarea,select{font:inherit;color:inherit;}
 .btn-sm{padding:6px 12px;font-size:13px;}
 .btn svg{width:15px;height:15px;}
 
-/* ── login ───────────────────────────────────────────────── */
+/* login */
 #login{display:flex;align-items:center;justify-content:center;min-height:100dvh;padding:20px;}
 .login-card{width:100%;max-width:400px;background:var(--bg-1);border:1px solid var(--line-soft);
   border-radius:20px;padding:clamp(28px,5vw,44px);display:flex;flex-direction:column;gap:28px;}
@@ -81,7 +77,7 @@ input,textarea,select{font:inherit;color:inherit;}
   color:var(--red);font-size:13px;padding:10px 14px;border-radius:8px;display:none;}
 .login-error.show{display:block;}
 
-/* ── form fields ─────────────────────────────────────────── */
+/* fields */
 .field{display:flex;flex-direction:column;gap:7px;}
 .field label{font-size:13px;font-weight:600;color:var(--muted);font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;}
 .field input,.field textarea,.field select{
@@ -96,56 +92,141 @@ input,textarea,select{font:inherit;color:inherit;}
 @media(max-width:600px){.form-row{grid-template-columns:1fr;}}
 .form-actions{display:flex;gap:10px;justify-content:flex-end;padding-top:8px;border-top:1px solid var(--line-soft);margin-top:4px;}
 
-/* ── projects table ──────────────────────────────────────── */
+/* projects table */
 .proj-table{width:100%;border-collapse:collapse;font-size:14px;}
 .proj-table th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--faint);padding:10px 16px;border-bottom:1px solid var(--line-soft);}
-.proj-table td{padding:14px 16px;border-bottom:1px solid color-mix(in oklch,var(--line-soft) 50%,transparent);
-  vertical-align:middle;}
+.proj-table td{padding:14px 16px;border-bottom:1px solid color-mix(in oklch,var(--line-soft) 50%,transparent);vertical-align:middle;}
 .proj-table tr:last-child td{border-bottom:none;}
 .proj-table tr:hover td{background:color-mix(in oklch,var(--bg-1) 60%,transparent);}
-.proj-table .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:3px 9px;
-  border-radius:6px;border:1px solid var(--line-soft);color:var(--muted);}
+.proj-table .pill{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:3px 9px;border-radius:6px;border:1px solid var(--line-soft);color:var(--muted);}
 .proj-table .status-on{background:var(--green-soft);color:var(--green);border-color:color-mix(in oklch,var(--green) 30%,transparent);}
 .proj-table .status-off{background:var(--red-soft);color:var(--red);border-color:color-mix(in oklch,var(--red) 30%,transparent);}
 .proj-table .actions{display:flex;gap:6px;}
 .drag-handle{cursor:grab;color:var(--faint);padding:4px;}
-.drag-handle:active{cursor:grabbing;}
 
-/* ── modal ───────────────────────────────────────────────── */
-.modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);
+/* modal */
+.modal-backdrop{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.75);
   backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;
-  padding:clamp(16px,5vw,48px) clamp(12px,3vw,24px);overflow-y:auto;}
+  padding:clamp(16px,4vw,40px) clamp(12px,3vw,20px);overflow-y:auto;}
 .modal-backdrop.open{display:flex;}
 .modal{background:var(--bg-1);border:1px solid var(--line-soft);border-radius:20px;
-  width:100%;max-width:680px;display:flex;flex-direction:column;gap:0;
+  width:100%;max-width:720px;display:flex;flex-direction:column;
   box-shadow:0 40px 80px -30px #000;}
 .modal-head{display:flex;align-items:center;justify-content:space-between;
   padding:20px 24px;border-bottom:1px solid var(--line-soft);}
 .modal-head h2{font-size:17px;font-weight:600;letter-spacing:-.01em;}
-.modal-close{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;
-  color:var(--muted);transition:.15s;}
+.modal-close{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--muted);transition:.15s;}
 .modal-close:hover{background:var(--bg-2);color:var(--fg);}
-.modal-body{padding:24px;display:flex;flex-direction:column;gap:18px;}
+.modal-body{padding:24px;display:flex;flex-direction:column;gap:20px;}
 
-/* ── accent dots ─────────────────────────────────────────── */
+/* section divider inside modal */
+.modal-sec{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--faint);padding-bottom:10px;border-bottom:1px solid var(--line-soft);margin-top:4px;}
+
+/* accent picker */
 .accent-picker{display:flex;gap:8px;flex-wrap:wrap;}
 .accent-opt{width:26px;height:26px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:.15s;}
 .accent-opt.sel{border-color:var(--fg);transform:scale(1.15);}
 
-/* ── tags editor ─────────────────────────────────────────── */
+/* tags editor */
 .tags-wrap{display:flex;flex-wrap:wrap;gap:7px;padding:10px 12px;
-  background:var(--bg-2);border:1px solid var(--line-soft);border-radius:10px;min-height:44px;
-  cursor:text;transition:.18s var(--ease);}
+  background:var(--bg-2);border:1px solid var(--line-soft);border-radius:10px;min-height:44px;cursor:text;transition:.18s var(--ease);}
 .tags-wrap:focus-within{border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft);}
 .tag-chip{display:inline-flex;align-items:center;gap:5px;background:var(--bg-3);
   border:1px solid var(--line-soft);border-radius:6px;padding:3px 8px;font-size:13px;}
 .tag-chip button{color:var(--faint);font-size:14px;line-height:1;transition:.15s;}
 .tag-chip button:hover{color:var(--red);}
-.tags-input{border:none;background:transparent;outline:none;font-size:14px;color:var(--fg);
-  min-width:100px;flex:1;}
+.tags-input{border:none;background:transparent;outline:none;font-size:14px;color:var(--fg);min-width:100px;flex:1;}
 
-/* ── toast ───────────────────────────────────────────────── */
+/* ── image upload zones ─────────────────────────────────── */
+.img-section{display:flex;flex-direction:column;gap:12px;}
+.img-section-label{font-size:13px;font-weight:600;color:var(--muted);font-family:var(--mono);
+  letter-spacing:.06em;text-transform:uppercase;}
+
+/* cover drop zone */
+.cover-zone{
+  position:relative;border-radius:14px;overflow:hidden;
+  border:2px dashed var(--line-soft);background:var(--bg-2);
+  aspect-ratio:16/7;cursor:pointer;transition:.2s var(--ease);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+}
+.cover-zone:hover,.cover-zone.drag-active{border-color:var(--green);background:var(--green-soft);}
+.cover-zone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.cover-zone .zone-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;background:rgba(0,0,0,.55);opacity:0;transition:.2s;
+}
+.cover-zone:hover .zone-overlay{opacity:1;}
+.cover-zone .zone-placeholder{display:flex;flex-direction:column;align-items:center;gap:8px;
+  pointer-events:none;color:var(--faint);}
+.cover-zone .zone-placeholder svg{width:32px;height:32px;opacity:.5;}
+.cover-zone .zone-placeholder span{font-size:13px;}
+.cover-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.cover-zone .uploading-bar{
+  position:absolute;bottom:0;left:0;height:3px;background:var(--green);
+  transition:width .3s;border-radius:0 2px 2px 0;
+}
+.cover-zone .rm-btn{
+  position:absolute;top:10px;right:10px;z-index:5;width:28px;height:28px;border-radius:7px;
+  background:rgba(0,0,0,.7);color:#fff;display:none;place-items:center;border:1px solid rgba(255,255,255,.2);
+  font-size:16px;line-height:1;transition:.15s;
+}
+.cover-zone:hover .rm-btn{display:grid;}
+.cover-zone .rm-btn:hover{background:var(--red);}
+
+/* gallery grid */
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+}
+@media(max-width:560px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+
+.gallery-slot{
+  position:relative;border-radius:10px;overflow:hidden;
+  border:2px dashed var(--line-soft);background:var(--bg-2);
+  aspect-ratio:4/3;cursor:pointer;transition:.2s var(--ease);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+}
+.gallery-slot:hover,.gallery-slot.drag-active{border-color:var(--green);background:var(--green-soft);}
+.gallery-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.gallery-slot .slot-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
+  font-size:10px;font-family:var(--mono);color:rgba(255,255,255,.7);
+  padding:14px 8px 6px;text-align:center;pointer-events:none;
+}
+.gallery-slot .zone-placeholder{display:flex;flex-direction:column;align-items:center;gap:5px;
+  pointer-events:none;color:var(--faint);}
+.gallery-slot .zone-placeholder svg{width:22px;height:22px;opacity:.45;}
+.gallery-slot .zone-placeholder span{font-size:11px;font-family:var(--mono);}
+.gallery-slot input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.gallery-slot .uploading-bar{
+  position:absolute;bottom:0;left:0;height:3px;background:var(--green);transition:width .3s;
+}
+.gallery-slot .rm-btn{
+  position:absolute;top:6px;right:6px;z-index:5;width:24px;height:24px;border-radius:6px;
+  background:rgba(0,0,0,.75);color:#fff;display:none;place-items:center;
+  border:1px solid rgba(255,255,255,.2);font-size:14px;line-height:1;transition:.15s;
+}
+.gallery-slot:hover .rm-btn{display:grid;}
+.gallery-slot .rm-btn:hover{background:var(--red);}
+.gallery-slot .progress-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.55);
+  display:none;align-items:center;justify-content:center;flex-direction:column;gap:6px;
+}
+.gallery-slot .progress-overlay.show{display:flex;}
+.gallery-slot .progress-overlay span{font-size:11px;color:#fff;font-family:var(--mono);}
+.cover-zone .progress-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.55);
+  display:none;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+}
+.cover-zone .progress-overlay.show{display:flex;}
+.cover-zone .progress-overlay span{font-size:13px;color:#fff;font-family:var(--mono);}
+.spinner{width:28px;height:28px;border:3px solid rgba(255,255,255,.2);
+  border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* toast */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
   background:var(--bg-2);border:1px solid var(--line-soft);border-radius:12px;
   padding:12px 20px;font-size:14px;font-weight:500;z-index:200;
@@ -154,24 +235,19 @@ input,textarea,select{font:inherit;color:inherit;}
 .toast.ok{border-color:color-mix(in oklch,var(--green) 40%,transparent);color:var(--green);}
 .toast.err{border-color:color-mix(in oklch,var(--red) 40%,transparent);color:var(--red);}
 
-/* ── empty state ─────────────────────────────────────────── */
 .empty{text-align:center;padding:64px 20px;color:var(--muted);}
-.empty svg{margin:0 auto 16px;opacity:.3;}
 .empty p{font-size:15px;}
-
-/* ── drag-over highlight ─────────────────────────────────── */
 tr.drag-over td{background:var(--green-soft)!important;}
 </style>
 </head>
 <body>
 <div class="page-bg"></div>
+
+<!-- LOGIN -->
 <div id="login" style="display:none">
   <div class="login-card">
     <img src="assets/syntax-logo.png" alt="SYNTAX"/>
-    <div>
-      <h2>Painel Admin</h2>
-      <p>Entre com sua conta para gerenciar os projetos.</p>
-    </div>
+    <div><h2>Painel Admin</h2><p>Entre com sua conta para gerenciar os projetos.</p></div>
     <div id="login-error" class="login-error"></div>
     <div class="field">
       <label>E-mail</label>
@@ -181,12 +257,11 @@ tr.drag-over td{background:var(--green-soft)!important;}
       <label>Senha</label>
       <input id="password" type="password" placeholder="••••••••" autocomplete="current-password"/>
     </div>
-    <button class="btn btn-primary" id="login-btn" onclick="doLogin()">
-      Entrar
-    </button>
+    <button class="btn btn-primary" id="login-btn" onclick="doLogin()">Entrar</button>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app" style="display:none">
   <header class="topbar">
     <a href="index.html"><img src="assets/syntax-logo.png" alt="SYNTAX"/></a>
@@ -230,7 +305,7 @@ tr.drag-over td{background:var(--green-soft)!important;}
   </main>
 </div>
 
-<!-- Modal add/edit -->
+<!-- MODAL CRIAR / EDITAR -->
 <div class="modal-backdrop" id="modal">
   <div class="modal">
     <div class="modal-head">
@@ -241,6 +316,9 @@ tr.drag-over td{background:var(--green-soft)!important;}
     </div>
     <div class="modal-body">
       <input type="hidden" id="f-id"/>
+
+      <!-- INFORMAÇÕES -->
+      <div class="modal-sec">Informações do projeto</div>
 
       <div class="form-row">
         <div class="field">
@@ -261,7 +339,7 @@ tr.drag-over td{background:var(--green-soft)!important;}
 
       <div class="field">
         <label>Resumo (1 linha)</label>
-        <textarea id="f-summary" placeholder="Uma frase que sintetiza o resultado do projeto…"></textarea>
+        <textarea id="f-summary" placeholder="Uma frase que sintetiza o resultado…"></textarea>
       </div>
 
       <div class="form-row">
@@ -289,24 +367,22 @@ tr.drag-over td{background:var(--green-soft)!important;}
       <div class="field">
         <label>Tags</label>
         <div class="tags-wrap" id="tags-wrap" onclick="document.getElementById('tags-input').focus()">
-          <input id="tags-input" class="tags-input" placeholder="Digite e pressione Enter…"
-            onkeydown="tagsKeydown(event)"/>
+          <input id="tags-input" class="tags-input" placeholder="Digite e pressione Enter…" onkeydown="tagsKeydown(event)"/>
         </div>
-        <span class="hint">Pressione Enter ou vírgula para adicionar</span>
-      </div>
-
-      <div class="field">
-        <label>Cor de destaque</label>
-        <div class="accent-picker" id="accent-picker">
-          <div class="accent-opt sel" data-var="var(--green)"   data-hex="#3fbf6a" style="background:#3fbf6a" title="green"></div>
-          <div class="accent-opt"     data-var="var(--violet)"  data-hex="#9a7bff" style="background:#9a7bff" title="violet"></div>
-          <div class="accent-opt"     data-var="var(--blue)"    data-hex="#5aa9ff" style="background:#5aa9ff" title="blue"></div>
-          <div class="accent-opt"     data-var="var(--orange)"  data-hex="#f0a24a" style="background:#f0a24a" title="orange"></div>
-          <div class="accent-opt"     data-var="var(--pink)"    data-hex="#ff7ab0" style="background:#ff7ab0" title="pink"></div>
-        </div>
+        <span class="hint" style="margin-top:2px">Enter ou vírgula para adicionar</span>
       </div>
 
       <div class="form-row">
+        <div class="field">
+          <label>Cor de destaque</label>
+          <div class="accent-picker" id="accent-picker" style="margin-top:4px">
+            <div class="accent-opt sel" data-var="var(--green)"  data-hex="#3fbf6a" style="background:#3fbf6a" title="green"></div>
+            <div class="accent-opt"    data-var="var(--violet)" data-hex="#9a7bff" style="background:#9a7bff" title="violet"></div>
+            <div class="accent-opt"    data-var="var(--blue)"   data-hex="#5aa9ff" style="background:#5aa9ff" title="blue"></div>
+            <div class="accent-opt"    data-var="var(--orange)" data-hex="#f0a24a" style="background:#f0a24a" title="orange"></div>
+            <div class="accent-opt"    data-var="var(--pink)"   data-hex="#ff7ab0" style="background:#ff7ab0" title="pink"></div>
+          </div>
+        </div>
         <div class="field">
           <label>Mock / preview</label>
           <select id="f-mock">
@@ -318,31 +394,67 @@ tr.drag-over td{background:var(--green-soft)!important;}
             <option value="portfolio">Portfólio</option>
           </select>
         </div>
-        <div class="field">
-          <label>URL da capa (opcional)</label>
-          <input id="f-cover" type="url" placeholder="https://…"/>
-          <span class="hint">Imagem real para substituir o placeholder</span>
-        </div>
       </div>
 
       <div class="field">
-        <label>Galeria — 3 labels (separados por |)</label>
-        <input id="f-gallery" type="text" placeholder="Visão geral | Detalhe de interface | Sistema de design"/>
-        <span class="hint">Estes textos aparecem nos placeholders das imagens do case</span>
+        <label>Labels da galeria (3, separados por |)</label>
+        <input id="f-gallery" type="text" placeholder="Visão geral | Detalhe | Sistema de design"/>
+        <span class="hint">Aparecem nos placeholders quando não há imagem</span>
       </div>
 
-      <div class="field" style="flex-direction:row;align-items:center;gap:12px;">
-        <input id="f-published" type="checkbox" checked
-          style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex:none;"/>
-        <label for="f-published" style="text-transform:none;letter-spacing:0;font-size:14px;cursor:pointer;color:var(--fg);">
-          Publicado (visível no site)
-        </label>
+      <div class="field" style="flex-direction:row;align-items:center;gap:12px;margin-top:2px;">
+        <input id="f-published" type="checkbox" checked style="width:18px;height:18px;accent-color:var(--green);cursor:pointer;flex:none;"/>
+        <label for="f-published" style="text-transform:none;letter-spacing:0;font-size:14px;cursor:pointer;color:var(--fg);">Publicado (visível no site)</label>
+      </div>
+
+      <!-- IMAGENS -->
+      <div class="modal-sec" style="margin-top:8px;">Imagens do projeto</div>
+
+      <!-- capa -->
+      <div class="img-section">
+        <div class="img-section-label">Capa principal (hero shot)</div>
+        <div class="cover-zone" id="cover-zone"
+          ondragover="zoneDragOver(event,'cover-zone')"
+          ondragleave="zoneDragLeave('cover-zone')"
+          ondrop="zoneDrop(event,'cover')">
+          <img id="cover-preview" src="" alt="" style="display:none"/>
+          <div class="zone-placeholder" id="cover-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <span>Arraste um PNG aqui ou clique para selecionar</span>
+            <span style="font-size:11px;opacity:.6">Recomendado: 1600×820px · PNG</span>
+          </div>
+          <div class="zone-overlay">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span style="font-size:12px;color:#fff">Trocar imagem</span>
+          </div>
+          <div class="progress-overlay" id="cover-progress">
+            <div class="spinner"></div>
+            <span>Enviando…</span>
+          </div>
+          <button class="rm-btn" id="cover-rm" onclick="removeImage('cover',event)" title="Remover">×</button>
+          <input type="file" id="cover-file" accept="image/png,image/jpeg,image/webp" onchange="uploadImage(event,'cover')"/>
+        </div>
+      </div>
+
+      <!-- galeria -->
+      <div class="img-section">
+        <div class="img-section-label">Imagens do case (até 6)</div>
+        <div style="font-size:12px;color:var(--faint);margin-top:-4px;">
+          Slot 1–3 aparecem na primeira linha / par · Slot 4 full-width · Slots 5–6 segundo par
+        </div>
+        <div class="gallery-grid" id="gallery-grid">
+          <!-- gerado por JS -->
+        </div>
       </div>
 
       <div class="form-actions">
         <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
         <button class="btn btn-primary" id="save-btn" onclick="saveProject()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
           Salvar projeto
         </button>
       </div>
@@ -350,7 +462,7 @@ tr.drag-over td{background:var(--green-soft)!important;}
   </div>
 </div>
 
-<!-- Modal confirmar exclusão -->
+<!-- MODAL EXCLUIR -->
 <div class="modal-backdrop" id="modal-del">
   <div class="modal" style="max-width:420px;">
     <div class="modal-head">
@@ -361,7 +473,7 @@ tr.drag-over td{background:var(--green-soft)!important;}
     </div>
     <div class="modal-body">
       <p style="color:var(--muted);font-size:15px;line-height:1.6;">
-        Tem certeza que deseja excluir o projeto <strong id="del-title"></strong>? Essa ação não pode ser desfeita.
+        Tem certeza que deseja excluir <strong id="del-title"></strong>? Esta ação não pode ser desfeita.
       </p>
       <div class="form-actions">
         <button class="btn btn-ghost" onclick="closeDelModal()">Cancelar</button>
@@ -374,75 +486,69 @@ tr.drag-over td{background:var(--green-soft)!important;}
 <div class="toast" id="toast"></div>
 
 <script>
-/* ── Supabase config ───────────────────────────────────── */
 const SB_URL  = 'https://thcjrzluhsbgtbirdoxl.supabase.co';
 const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRoY2pyemx1aHNiZ3RiaXJkb3hsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTM1MjcsImV4cCI6MjA4ODkyOTUyN30.DdhrLvq1G0b0MrPkMBr4jP0pkzzM1JVsUBnR9V7s8dU';
+const BUCKET  = 'project-images';
 
-let session = null;   // { access_token, user }
-let projects = [];    // lista carregada
+let session = null;
+let projects = [];
 let deletingId = null;
 let currentTags = [];
 
-/* ── http helpers ──────────────────────────────────────── */
+// imagens em edição: { cover: url|null, gallery: [url|null x6] }
+let imgState = { cover: null, gallery: Array(6).fill(null) };
+
+/* ── http ─────────────────────────────────────────────── */
 async function sbFetch(path, opts = {}) {
-  const headers = {
-    apikey: SB_ANON,
-    'Content-Type': 'application/json',
-    ...(session ? { Authorization: `Bearer ${session.access_token}` } : {}),
-    ...opts.headers,
-  };
-  const r = await fetch(SB_URL + path, { ...opts, headers });
+  const r = await fetch(SB_URL + path, {
+    ...opts,
+    headers: {
+      apikey: SB_ANON,
+      'Content-Type': 'application/json',
+      ...(session ? { Authorization: `Bearer ${session.access_token}` } : {}),
+      ...opts.headers,
+    },
+  });
   const body = r.headers.get('content-type')?.includes('json') ? await r.json() : null;
-  if (!r.ok) throw new Error(body?.message || body?.error_description || r.status);
+  if (!r.ok) throw new Error(body?.message || body?.error_description || String(r.status));
   return body;
 }
 
-/* ── auth ──────────────────────────────────────────────── */
+/* ── auth ────────────────────────────────────────────── */
 async function doLogin() {
-  const email    = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const btn      = document.getElementById('login-btn');
-  const err      = document.getElementById('login-error');
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('password').value;
+  const btn   = document.getElementById('login-btn');
+  const err   = document.getElementById('login-error');
   err.classList.remove('show');
   btn.disabled = true; btn.textContent = 'Entrando…';
   try {
     const data = await sbFetch('/auth/v1/token?grant_type=password', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
+      method: 'POST', body: JSON.stringify({ email, password: pass }),
     });
     session = { access_token: data.access_token, user: data.user };
     localStorage.setItem('syntax_admin_session', JSON.stringify(session));
     showApp();
-  } catch (e) {
+  } catch {
     err.textContent = 'E-mail ou senha incorretos.';
     err.classList.add('show');
   } finally {
     btn.disabled = false; btn.textContent = 'Entrar';
   }
 }
-
 async function doLogout() {
   try { await sbFetch('/auth/v1/logout', { method: 'POST' }); } catch(_){}
-  session = null;
-  localStorage.removeItem('syntax_admin_session');
-  location.reload();
+  session = null; localStorage.removeItem('syntax_admin_session'); location.reload();
 }
+document.getElementById('password').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 
-document.getElementById('password').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doLogin();
-});
-
-/* ── bootstrap ─────────────────────────────────────────── */
 (async () => {
   const stored = localStorage.getItem('syntax_admin_session');
   if (stored) {
     try {
       const s = JSON.parse(stored);
-      // verifica se o token ainda é válido
-      const user = await sbFetch('/auth/v1/user', {
-        headers: { Authorization: `Bearer ${s.access_token}` },
-      });
-      if (user?.id) { session = s; showApp(); return; }
+      const u = await sbFetch('/auth/v1/user', { headers:{ Authorization:`Bearer ${s.access_token}` } });
+      if (u?.id) { session = s; showApp(); return; }
     } catch(_) { localStorage.removeItem('syntax_admin_session'); }
   }
   showLogin();
@@ -459,49 +565,47 @@ function showApp() {
   loadProjects();
 }
 
-/* ── load projects ─────────────────────────────────────── */
+/* ── projects ────────────────────────────────────────── */
 async function loadProjects() {
   try {
-    projects = await sbFetch('/rest/v1/projects?select=*&order=order_index.asc', {
-      headers: { Prefer: 'return=representation' },
-    });
+    projects = await sbFetch('/rest/v1/projects?select=*&order=order_index.asc');
     renderTable();
-  } catch(e) {
-    toast('Erro ao carregar projetos: ' + e.message, 'err');
-  }
+  } catch(e) { toast('Erro ao carregar: ' + e.message, 'err'); }
 }
 
 function renderTable() {
   const tbody = document.getElementById('proj-tbody');
   if (!projects.length) {
-    tbody.innerHTML = `<tr><td colspan="7"><div class="empty">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8M8 12h8"/></svg>
-      <p>Nenhum projeto ainda. Clique em "Novo projeto" para começar.</p>
-    </div></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7"><div class="empty"><p>Nenhum projeto ainda.</p></div></td></tr>`;
     return;
   }
   tbody.innerHTML = projects.map((p, i) => `
     <tr draggable="true" data-id="${p.id}" data-i="${i}"
         ondragstart="dragStart(event)" ondragover="dragOver(event)"
         ondrop="dropRow(event)" ondragleave="dragLeave(event)">
-      <td class="drag-handle" title="Arrastar para reordenar">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="9" cy="5" r="1.5" fill="currentColor" stroke="none"/>
-          <circle cx="15" cy="5" r="1.5" fill="currentColor" stroke="none"/>
-          <circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-          <circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none"/>
-          <circle cx="9" cy="19" r="1.5" fill="currentColor" stroke="none"/>
-          <circle cx="15" cy="19" r="1.5" fill="currentColor" stroke="none"/>
+      <td class="drag-handle" title="Arrastar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <circle cx="9"  cy="5"  r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="5"  r="1.5" fill="currentColor"/>
+          <circle cx="9"  cy="12" r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="12" r="1.5" fill="currentColor"/>
+          <circle cx="9"  cy="19" r="1.5" fill="currentColor"/>
+          <circle cx="15" cy="19" r="1.5" fill="currentColor"/>
         </svg>
       </td>
       <td>
-        <div style="font-weight:600;font-size:14.5px;">${esc(p.title)}</div>
-        <div style="color:var(--muted);font-size:12.5px;margin-top:2px;">${esc(p.subtitle||'')}</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          ${p.cover_url ? `<img src="${esc(p.cover_url)}" style="width:48px;height:30px;object-fit:cover;border-radius:5px;flex:none;border:1px solid var(--line-soft)"/>` : ''}
+          <div>
+            <div style="font-weight:600;font-size:14.5px;">${esc(p.title)}</div>
+            <div style="color:var(--muted);font-size:12.5px;">${esc(p.subtitle||'')}</div>
+          </div>
+        </div>
       </td>
-      <td><span class="pill" style="font-size:11px;">${esc(p.slug)}</span></td>
+      <td><span class="pill">${esc(p.slug)}</span></td>
       <td style="color:var(--muted)">${esc(p.year||'')}</td>
-      <td>${(p.tags||[]).map(t => `<span class="pill" style="margin:2px">${esc(t)}</span>`).join('')}</td>
-      <td><span class="pill ${p.published ? 'status-on' : 'status-off'}">${p.published ? 'Publicado' : 'Rascunho'}</span></td>
+      <td>${(p.tags||[]).map(t=>`<span class="pill" style="margin:2px">${esc(t)}</span>`).join('')}</td>
+      <td><span class="pill ${p.published?'status-on':'status-off'}">${p.published?'Publicado':'Rascunho'}</span></td>
       <td class="actions">
         <button class="btn btn-ghost btn-sm" onclick="openModal('${p.id}')">Editar</button>
         <button class="btn btn-danger btn-sm" onclick="openDelModal('${p.id}','${esc(p.title)}')">
@@ -512,117 +616,228 @@ function renderTable() {
   `).join('');
 }
 
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
-/* ── drag & drop reorder ───────────────────────────────── */
+/* ── drag reorder ────────────────────────────────────── */
 let dragIdx = null;
-function dragStart(e) { dragIdx = +e.currentTarget.dataset.i; e.dataTransfer.effectAllowed='move'; }
-function dragOver(e)  { e.preventDefault(); e.currentTarget.closest('tr').classList.add('drag-over'); }
-function dragLeave(e) { e.currentTarget.closest('tr').classList.remove('drag-over'); }
+function dragStart(e){ dragIdx = +e.currentTarget.dataset.i; e.dataTransfer.effectAllowed='move'; }
+function dragOver(e) { e.preventDefault(); e.currentTarget.closest('tr').classList.add('drag-over'); }
+function dragLeave(e){ e.currentTarget.closest('tr').classList.remove('drag-over'); }
 async function dropRow(e) {
   e.preventDefault();
   const tr = e.currentTarget.closest('tr');
   tr.classList.remove('drag-over');
   const dropIdx = +tr.dataset.i;
-  if (dragIdx === null || dragIdx === dropIdx) return;
-  const moved = projects.splice(dragIdx, 1)[0];
-  projects.splice(dropIdx, 0, moved);
-  // reindex
-  projects.forEach((p, i) => p.order_index = i + 1);
+  if(dragIdx===null || dragIdx===dropIdx) return;
+  const moved = projects.splice(dragIdx,1)[0];
+  projects.splice(dropIdx,0,moved);
+  projects.forEach((p,i)=>p.order_index=i+1);
   renderTable();
-  // persiste no banco
   try {
-    await Promise.all(projects.map(p =>
-      sbFetch(`/rest/v1/projects?id=eq.${p.id}`, {
-        method: 'PATCH',
-        headers: { Prefer: 'return=minimal' },
-        body: JSON.stringify({ order_index: p.order_index }),
-      })
-    ));
-    toast('Ordem salva!', 'ok');
-  } catch(err) {
-    toast('Erro ao salvar ordem: ' + err.message, 'err');
-  }
-  dragIdx = null;
+    await Promise.all(projects.map(p=>sbFetch(`/rest/v1/projects?id=eq.${p.id}`,{
+      method:'PATCH', headers:{Prefer:'return=minimal'}, body:JSON.stringify({order_index:p.order_index}),
+    })));
+    toast('Ordem salva!','ok');
+  } catch(err){ toast('Erro ao salvar ordem: '+err.message,'err'); }
+  dragIdx=null;
 }
 
-/* ── tags editor ───────────────────────────────────────── */
+/* ── tags ────────────────────────────────────────────── */
 function renderTags() {
-  const wrap = document.getElementById('tags-wrap');
+  const wrap  = document.getElementById('tags-wrap');
   const input = document.getElementById('tags-input');
-  wrap.querySelectorAll('.tag-chip').forEach(el => el.remove());
-  currentTags.forEach((t, i) => {
+  wrap.querySelectorAll('.tag-chip').forEach(el=>el.remove());
+  currentTags.forEach((t,i)=>{
     const chip = document.createElement('span');
-    chip.className = 'tag-chip';
-    chip.innerHTML = `${esc(t)}<button type="button" onclick="removeTag(${i})" tabindex="-1">×</button>`;
-    wrap.insertBefore(chip, input);
+    chip.className='tag-chip';
+    chip.innerHTML=`${esc(t)}<button type="button" onclick="removeTag(${i})" tabindex="-1">×</button>`;
+    wrap.insertBefore(chip,input);
   });
 }
-function removeTag(i) { currentTags.splice(i, 1); renderTags(); }
-function tagsKeydown(e) {
-  const v = e.target.value.trim().replace(/,$/, '');
-  if ((e.key === 'Enter' || e.key === ',') && v) {
+function removeTag(i){ currentTags.splice(i,1); renderTags(); }
+function tagsKeydown(e){
+  const v=e.target.value.trim().replace(/,$/,'');
+  if((e.key==='Enter'||e.key===',')&&v){
     e.preventDefault();
-    if (!currentTags.includes(v)) currentTags.push(v);
-    e.target.value = '';
-    renderTags();
-  } else if (e.key === 'Backspace' && !e.target.value && currentTags.length) {
+    if(!currentTags.includes(v)) currentTags.push(v);
+    e.target.value=''; renderTags();
+  } else if(e.key==='Backspace'&&!e.target.value&&currentTags.length){
     currentTags.pop(); renderTags();
   }
 }
 
-/* ── accent picker ─────────────────────────────────────── */
-document.querySelectorAll('.accent-opt').forEach(el => {
-  el.addEventListener('click', () => {
-    document.querySelectorAll('.accent-opt').forEach(o => o.classList.remove('sel'));
-    el.classList.add('sel');
-  });
+/* ── accent ──────────────────────────────────────────── */
+document.querySelectorAll('.accent-opt').forEach(el=>{
+  el.addEventListener('click',()=>{ document.querySelectorAll('.accent-opt').forEach(o=>o.classList.remove('sel')); el.classList.add('sel'); });
 });
-function getAccent() {
-  const sel = document.querySelector('.accent-opt.sel');
-  return { var: sel?.dataset.var || 'var(--green)', hex: sel?.dataset.hex || '#3fbf6a' };
-}
-function setAccent(varVal) {
-  document.querySelectorAll('.accent-opt').forEach(o => {
-    o.classList.toggle('sel', o.dataset.var === varVal);
+function getAccent(){ const s=document.querySelector('.accent-opt.sel'); return {var:s?.dataset.var||'var(--green)',hex:s?.dataset.hex||'#3fbf6a'}; }
+function setAccent(v){ document.querySelectorAll('.accent-opt').forEach(o=>o.classList.toggle('sel',o.dataset.var===v)); }
+
+/* ── image upload ────────────────────────────────────── */
+function storagePath(slug, name) { return `${slug}/${name}`; }
+function storagePublicUrl(path) { return `${SB_URL}/storage/v1/object/public/${BUCKET}/${path}`; }
+
+async function uploadFile(file, path) {
+  // apaga versão anterior (ignora erro se não existir)
+  try {
+    await fetch(`${SB_URL}/storage/v1/object/${BUCKET}/${path}`, {
+      method: 'DELETE',
+      headers: { apikey: SB_ANON, Authorization: `Bearer ${session.access_token}` },
+    });
+  } catch(_){}
+
+  const r = await fetch(`${SB_URL}/storage/v1/object/${BUCKET}/${path}`, {
+    method: 'POST',
+    headers: {
+      apikey: SB_ANON,
+      Authorization: `Bearer ${session.access_token}`,
+      'Content-Type': file.type,
+      'Cache-Control': '3600',
+      'x-upsert': 'true',
+    },
+    body: file,
   });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message || r.status); }
+  return storagePublicUrl(path);
 }
 
-/* ── modal open/close ──────────────────────────────────── */
-function openModal(id) {
-  const modal = document.getElementById('modal');
-  const p = id ? projects.find(x => x.id === id) : null;
-  document.getElementById('modal-title').textContent = p ? 'Editar projeto' : 'Novo projeto';
-  document.getElementById('f-id').value        = p?.id        || '';
-  document.getElementById('f-title').value     = p?.title     || '';
-  document.getElementById('f-slug').value      = p?.slug      || '';
-  document.getElementById('f-subtitle').value  = p?.subtitle  || '';
-  document.getElementById('f-summary').value   = p?.summary   || '';
-  document.getElementById('f-role').value      = p?.role      || '';
-  document.getElementById('f-duration').value  = p?.duration  || '';
-  document.getElementById('f-team').value      = p?.team      || '';
-  document.getElementById('f-year').value      = p?.year      || '';
-  document.getElementById('f-mock').value      = p?.mock      || 'dashboard';
-  document.getElementById('f-cover').value     = p?.cover_url || '';
-  document.getElementById('f-gallery').value   = (p?.gallery  || []).join(' | ');
-  document.getElementById('f-published').checked = p ? p.published : true;
-  currentTags = [...(p?.tags || [])];
-  renderTags();
-  setAccent(p?.accent || 'var(--green)');
-  // auto-slug from title
-  if (!p) {
-    document.getElementById('f-title').addEventListener('input', autoSlug, { once: false });
+async function uploadImage(event, type, idx) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const slug = document.getElementById('f-slug').value.trim() || 'projeto';
+
+  if (type === 'cover') {
+    const prog = document.getElementById('cover-progress');
+    prog.classList.add('show');
+    try {
+      const url = await uploadFile(file, storagePath(slug, 'cover'));
+      imgState.cover = url;
+      setCoverPreview(url);
+      toast('Capa enviada!', 'ok');
+    } catch(e) { toast('Erro upload capa: ' + e.message, 'err'); }
+    finally { prog.classList.remove('show'); event.target.value=''; }
+  } else {
+    // gallery slot
+    const overlay = document.getElementById(`gslot-prog-${idx}`);
+    if(overlay) overlay.classList.add('show');
+    try {
+      const url = await uploadFile(file, storagePath(slug, `gallery-${idx}`));
+      imgState.gallery[idx] = url;
+      setGallerySlot(idx, url);
+      toast(`Imagem ${idx+1} enviada!`, 'ok');
+    } catch(e) { toast('Erro upload imagem: ' + e.message, 'err'); }
+    finally { if(overlay) overlay.classList.remove('show'); event.target.value=''; }
   }
-  modal.classList.add('open');
+}
+
+function setCoverPreview(url) {
+  const img  = document.getElementById('cover-preview');
+  const ph   = document.getElementById('cover-placeholder');
+  if (url) {
+    img.src = url; img.style.display = 'block';
+    ph.style.display = 'none';
+  } else {
+    img.src = ''; img.style.display = 'none';
+    ph.style.display = 'flex';
+  }
+}
+
+function setGallerySlot(idx, url) {
+  const slot = document.getElementById(`gslot-${idx}`);
+  if (!slot) return;
+  const img = slot.querySelector('img');
+  const ph  = slot.querySelector('.zone-placeholder');
+  if (url) {
+    img.src = url; img.style.display = 'block';
+    ph.style.display = 'none';
+  } else {
+    img.src = ''; img.style.display = 'none';
+    ph.style.display = 'flex';
+  }
+}
+
+function removeImage(type, e, idx) {
+  e && e.stopPropagation();
+  if (type === 'cover') { imgState.cover = null; setCoverPreview(null); }
+  else { imgState.gallery[idx] = null; setGallerySlot(idx, null); }
+}
+
+/* drag-drop direto na zona */
+function zoneDragOver(e, zoneId) { e.preventDefault(); document.getElementById(zoneId).classList.add('drag-active'); }
+function zoneDragLeave(zoneId)  { document.getElementById(`${zoneId}`).classList.remove('drag-active'); }
+async function zoneDrop(e, type, idx) {
+  e.preventDefault();
+  const zoneId = type==='cover' ? 'cover-zone' : `gslot-${idx}`;
+  document.getElementById(zoneId)?.classList.remove('drag-active');
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const fakeEvt = { target: { files: [file], value: '' } };
+  await uploadImage(fakeEvt, type, idx);
+}
+
+function buildGalleryGrid() {
+  const labels = ['Imagem 1','Imagem 2','Imagem 3','Imagem 4 (full)','Imagem 5','Imagem 6'];
+  const grid = document.getElementById('gallery-grid');
+  grid.innerHTML = labels.map((lbl, i) => `
+    <div class="gallery-slot" id="gslot-${i}"
+      ondragover="zoneDragOver(event,'gslot-${i}')"
+      ondragleave="zoneDragLeave('gslot-${i}')"
+      ondrop="zoneDrop(event,'gallery',${i})">
+      <img src="" alt="" style="display:none"/>
+      <div class="zone-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <span>${lbl}</span>
+      </div>
+      <div class="progress-overlay" id="gslot-prog-${i}">
+        <div class="spinner"></div><span>Enviando…</span>
+      </div>
+      <span class="slot-label">${lbl}</span>
+      <button class="rm-btn" onclick="removeImage('gallery',event,${i})" title="Remover">×</button>
+      <input type="file" accept="image/png,image/jpeg,image/webp" onchange="uploadImage(event,'gallery',${i})"/>
+    </div>
+  `).join('');
+}
+
+/* ── modal ───────────────────────────────────────────── */
+function openModal(id) {
+  const p = id ? projects.find(x=>x.id===id) : null;
+  document.getElementById('modal-title').textContent = p ? 'Editar projeto' : 'Novo projeto';
+  document.getElementById('f-id').value       = p?.id        || '';
+  document.getElementById('f-title').value    = p?.title     || '';
+  document.getElementById('f-slug').value     = p?.slug      || '';
+  document.getElementById('f-subtitle').value = p?.subtitle  || '';
+  document.getElementById('f-summary').value  = p?.summary   || '';
+  document.getElementById('f-role').value     = p?.role      || '';
+  document.getElementById('f-duration').value = p?.duration  || '';
+  document.getElementById('f-team').value     = p?.team      || '';
+  document.getElementById('f-year').value     = p?.year      || '';
+  document.getElementById('f-mock').value     = p?.mock      || 'dashboard';
+  document.getElementById('f-gallery').value  = (p?.gallery  || []).join(' | ');
+  document.getElementById('f-published').checked = p ? p.published : true;
+  currentTags = [...(p?.tags||[])];
+  renderTags();
+  setAccent(p?.accent||'var(--green)');
+
+  // imagens
+  imgState.cover   = p?.cover_url || null;
+  imgState.gallery = [...(p?.gallery_urls || Array(6).fill(null))];
+  while(imgState.gallery.length < 6) imgState.gallery.push(null);
+
+  buildGalleryGrid();
+  setCoverPreview(imgState.cover);
+  imgState.gallery.forEach((url, i) => setGallerySlot(i, url));
+
+  if(!p) document.getElementById('f-title').addEventListener('input', autoSlug);
+  document.getElementById('modal').classList.add('open');
   document.getElementById('f-title').focus();
 }
+
 function autoSlug() {
-  const t = document.getElementById('f-title').value;
-  if (!document.getElementById('f-id').value) {
-    document.getElementById('f-slug').value = t.toLowerCase()
-      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+  if(!document.getElementById('f-id').value) {
+    document.getElementById('f-slug').value = document.getElementById('f-title').value
+      .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
       .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
   }
 }
@@ -631,111 +846,84 @@ function closeModal() {
   document.getElementById('f-title').removeEventListener('input', autoSlug);
 }
 
-/* ── save ──────────────────────────────────────────────── */
+/* ── save ────────────────────────────────────────────── */
 async function saveProject() {
-  const id       = document.getElementById('f-id').value;
-  const title    = document.getElementById('f-title').value.trim();
-  const slug     = document.getElementById('f-slug').value.trim();
-  if (!title || !slug) { toast('Título e slug são obrigatórios.','err'); return; }
+  const id      = document.getElementById('f-id').value;
+  const title   = document.getElementById('f-title').value.trim();
+  const slug    = document.getElementById('f-slug').value.trim();
+  if(!title||!slug){ toast('Título e slug são obrigatórios.','err'); return; }
 
   const gallery = document.getElementById('f-gallery').value
     .split('|').map(s=>s.trim()).filter(Boolean);
+  const accent  = getAccent();
 
-  const accent = getAccent();
   const payload = {
-    title,
-    slug,
-    subtitle:   document.getElementById('f-subtitle').value.trim(),
-    summary:    document.getElementById('f-summary').value.trim(),
-    role:       document.getElementById('f-role').value.trim(),
-    duration:   document.getElementById('f-duration').value.trim(),
-    team:       document.getElementById('f-team').value.trim(),
-    year:       document.getElementById('f-year').value.trim(),
-    mock:       document.getElementById('f-mock').value,
-    cover_url:  document.getElementById('f-cover').value.trim() || null,
+    title, slug,
+    subtitle:    document.getElementById('f-subtitle').value.trim(),
+    summary:     document.getElementById('f-summary').value.trim(),
+    role:        document.getElementById('f-role').value.trim(),
+    duration:    document.getElementById('f-duration').value.trim(),
+    team:        document.getElementById('f-team').value.trim(),
+    year:        document.getElementById('f-year').value.trim(),
+    mock:        document.getElementById('f-mock').value,
     gallery,
-    tags:       currentTags,
-    accent:     accent.var,
-    accent_hex: accent.hex,
-    published:  document.getElementById('f-published').checked,
+    tags:        currentTags,
+    accent:      accent.var,
+    accent_hex:  accent.hex,
+    published:   document.getElementById('f-published').checked,
+    cover_url:   imgState.cover || null,
+    gallery_urls: imgState.gallery.filter(Boolean),
   };
 
   const btn = document.getElementById('save-btn');
-  btn.disabled = true; btn.innerHTML = '…Salvando';
-
+  btn.disabled=true; btn.innerHTML='…Salvando';
   try {
-    if (id) {
-      await sbFetch(`/rest/v1/projects?id=eq.${id}`, {
-        method: 'PATCH',
-        headers: { Prefer: 'return=minimal' },
-        body: JSON.stringify(payload),
+    if(id){
+      await sbFetch(`/rest/v1/projects?id=eq.${id}`,{
+        method:'PATCH', headers:{Prefer:'return=minimal'}, body:JSON.stringify(payload),
       });
-      toast('Projeto atualizado!', 'ok');
+      toast('Projeto atualizado!','ok');
     } else {
-      payload.order_index = projects.length + 1;
-      await sbFetch('/rest/v1/projects', {
-        method: 'POST',
-        headers: { Prefer: 'return=minimal' },
-        body: JSON.stringify(payload),
+      payload.order_index = projects.length+1;
+      await sbFetch('/rest/v1/projects',{
+        method:'POST', headers:{Prefer:'return=minimal'}, body:JSON.stringify(payload),
       });
-      toast('Projeto criado!', 'ok');
+      toast('Projeto criado!','ok');
     }
-    closeModal();
-    await loadProjects();
-  } catch(e) {
-    toast('Erro: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Salvar projeto';
+    closeModal(); await loadProjects();
+  } catch(e){ toast('Erro: '+e.message,'err'); }
+  finally{
+    btn.disabled=false;
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Salvar projeto';
   }
 }
 
-/* ── delete ────────────────────────────────────────────── */
-function openDelModal(id, title) {
-  deletingId = id;
-  document.getElementById('del-title').textContent = title;
-  document.getElementById('modal-del').classList.add('open');
-}
-function closeDelModal() {
-  deletingId = null;
-  document.getElementById('modal-del').classList.remove('open');
-}
-async function confirmDelete() {
-  if (!deletingId) return;
-  const btn = document.getElementById('del-confirm-btn');
-  btn.disabled = true; btn.textContent = 'Excluindo…';
-  try {
-    await sbFetch(`/rest/v1/projects?id=eq.${deletingId}`, { method: 'DELETE' });
-    toast('Projeto excluído.', 'ok');
-    closeDelModal();
-    await loadProjects();
-  } catch(e) {
-    toast('Erro ao excluir: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false; btn.textContent = 'Excluir';
-  }
+/* ── delete ──────────────────────────────────────────── */
+function openDelModal(id,title){ deletingId=id; document.getElementById('del-title').textContent=title; document.getElementById('modal-del').classList.add('open'); }
+function closeDelModal(){ deletingId=null; document.getElementById('modal-del').classList.remove('open'); }
+async function confirmDelete(){
+  if(!deletingId) return;
+  const btn=document.getElementById('del-confirm-btn');
+  btn.disabled=true; btn.textContent='Excluindo…';
+  try{
+    await sbFetch(`/rest/v1/projects?id=eq.${deletingId}`,{method:'DELETE'});
+    toast('Projeto excluído.','ok'); closeDelModal(); await loadProjects();
+  } catch(e){ toast('Erro: '+e.message,'err'); }
+  finally{ btn.disabled=false; btn.textContent='Excluir'; }
 }
 
-/* ── toast ─────────────────────────────────────────────── */
+/* ── toast ───────────────────────────────────────────── */
 let toastTimer;
-function toast(msg, type = 'ok') {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `toast ${type} show`;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+function toast(msg,type='ok'){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.className=`toast ${type} show`;
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),3200);
 }
 
-/* ── close modal on backdrop click ─────────────────────── */
-document.getElementById('modal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeModal();
-});
-document.getElementById('modal-del').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeDelModal();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeModal(); closeDelModal(); }
-});
+/* ── close on backdrop / ESC ─────────────────────────── */
+document.getElementById('modal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeModal(); });
+document.getElementById('modal-del').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeDelModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); closeDelModal(); } });
 </script>
 </body>
 </html>

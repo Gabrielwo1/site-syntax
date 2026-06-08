@@ -10,11 +10,24 @@ function CaseMeta({ p }){
   );
 }
 
-function Shot({ label, ratio }){
-  return <div className="ph reveal" style={ratio?{aspectRatio:ratio}:null}><span className="ph-label">[ {label} ]</span></div>;
+/* Exibe imagem real se `src` fornecido, senão placeholder listrado */
+function Shot({ label, ratio, src }){
+  if(src){
+    return (
+      <div className="real-shot reveal" style={ratio?{aspectRatio:ratio}:null}>
+        <img src={src} alt={label} loading="lazy"/>
+      </div>
+    );
+  }
+  return (
+    <div className="ph reveal" style={ratio?{aspectRatio:ratio}:null}>
+      <span className="ph-label">[ {label} ]</span>
+    </div>
+  );
 }
 
 function CaseStudy({ p, others }){
+  const gu = p.galleryUrls || [];
   return (
     <div style={{['--card-accent']:p.accent}}>
       <nav className="case-nav">
@@ -38,23 +51,27 @@ function CaseStudy({ p, others }){
             <CaseMeta p={p}/>
           </div>
 
-          {/* cover */}
-          <Shot label={`capa do projeto — ${p.mock} hero shot`} ratio="16/8.2"/>
+          {/* capa */}
+          <Shot
+            label={`capa do projeto — ${p.mock} hero shot`}
+            ratio="16/8.2"
+            src={p.coverUrl || null}
+          />
 
           {/* one-line intro */}
           <p className="case-lead reveal">{p.summary}</p>
 
-          {/* image areas only */}
+          {/* áreas de imagem */}
           <div className="case-shots">
-            <Shot label={p.gallery[0]} ratio="16/8.5"/>
+            <Shot label={p.gallery[0]||'imagem 1'} ratio="16/8.5"  src={gu[0]||null}/>
             <div className="shots-2">
-              <Shot label={p.gallery[1]} ratio="4/3.4"/>
-              <Shot label={p.gallery[2]} ratio="4/3.4"/>
+              <Shot label={p.gallery[1]||'imagem 2'} ratio="4/3.4" src={gu[1]||null}/>
+              <Shot label={p.gallery[2]||'imagem 3'} ratio="4/3.4" src={gu[2]||null}/>
             </div>
-            <Shot label="detalhes de interface & componentes" ratio="16/7"/>
+            <Shot label="detalhes de interface & componentes" ratio="16/7"   src={gu[3]||null}/>
             <div className="shots-2">
-              <Shot label="antes / depois" ratio="4/3.4"/>
-              <Shot label="sistema de design" ratio="4/3.4"/>
+              <Shot label="antes / depois"     ratio="4/3.4" src={gu[4]||null}/>
+              <Shot label="sistema de design"  ratio="4/3.4" src={gu[5]||null}/>
             </div>
           </div>
         </div>
@@ -82,23 +99,41 @@ function CaseStudy({ p, others }){
 function CasePage(){
   const params=new URLSearchParams(location.search);
   const slug=params.get('p');
-  const list=window.PROJECTS||[];
-  const idx=Math.max(0, list.findIndex(x=>x.slug===slug));
-  const p=list[idx]||list[0];
-  const others=list.map((proj,i)=>({proj,idx:i})).filter(o=>o.proj.slug!==p.slug).slice(0,3);
+
+  const render = () => {
+    const list=window.PROJECTS||[];
+    const idx=Math.max(0, list.findIndex(x=>x.slug===slug));
+    const p=list[idx]||list[0];
+    const others=list.map((proj,i)=>({proj,idx:i})).filter(o=>o.proj.slug!==p.slug).slice(0,3);
+    return { p, others };
+  };
+
+  const [state, setState] = React.useState(null);
 
   useCEffect(()=>{
-    document.title=`${p.title} — SYNTAX`;
-    window.scrollTo(0,0);
-    const io=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.1, rootMargin:'0px 0px -6% 0px'});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-    return ()=>io.disconnect();
+    const init = () => {
+      const { p, others } = render();
+      setState({ p, others });
+      document.title=`${p.title} — SYNTAX`;
+      window.scrollTo(0,0);
+      setTimeout(()=>{
+        const io=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.1, rootMargin:'0px 0px -6% 0px'});
+        document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+      }, 50);
+    };
+    if(window.__dbReady){
+      window.__dbReady.then(init);
+    } else {
+      init();
+    }
   },[]);
+
+  if(!state) return <div className="page-bg"/>;
 
   return (
     <>
       <div className="page-bg"/>
-      <CaseStudy p={p} others={others}/>
+      <CaseStudy p={state.p} others={state.others}/>
       {window.SiteFooter && <SiteFooter/>}
       <div className="grain"/>
     </>

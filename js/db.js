@@ -22,8 +22,9 @@
       duration:  row.duration  || '',
       team:      row.team      || '',
       summary:   row.summary   || '',
-      gallery:   row.gallery   || [],
-      coverUrl:  row.cover_url || null,
+      gallery:    row.gallery      || [],
+      coverUrl:   row.cover_url   || null,
+      galleryUrls: row.gallery_urls || [],
     };
   }
 
