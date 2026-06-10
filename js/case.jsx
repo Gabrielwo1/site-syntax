@@ -10,15 +10,18 @@ function CaseMeta({ p }){
   );
 }
 
-/* Exibe imagem real se `src` fornecido, senão placeholder listrado */
-function Shot({ label, ratio, src }){
+/* Exibe imagem real se `src` fornecido, senão placeholder listrado.
+   Se `hideIfEmpty` for true e não tiver src, não renderiza nada. */
+function Shot({ label, ratio, src, hideIfEmpty }){
   if(src){
+    // sem aspect-ratio fixo: a imagem ocupa sua altura natural
     return (
-      <div className="real-shot reveal" style={ratio?{aspectRatio:ratio}:null}>
+      <div className="real-shot reveal">
         <img src={src} alt={label} loading="lazy"/>
       </div>
     );
   }
+  if(hideIfEmpty) return null;
   return (
     <div className="ph reveal" style={ratio?{aspectRatio:ratio}:null}>
       <span className="ph-label">[ {label} ]</span>
@@ -61,18 +64,14 @@ function CaseStudy({ p, others }){
           {/* one-line intro */}
           <p className="case-lead reveal">{p.summary}</p>
 
-          {/* áreas de imagem */}
+          {/* áreas de imagem — coluna simples, sem espaços vazios */}
           <div className="case-shots">
-            <Shot label={p.gallery[0]||'imagem 1'} ratio="16/8.5"  src={gu[0]||null}/>
-            <div className="shots-2">
-              <Shot label={p.gallery[1]||'imagem 2'} ratio="4/3.4" src={gu[1]||null}/>
-              <Shot label={p.gallery[2]||'imagem 3'} ratio="4/3.4" src={gu[2]||null}/>
-            </div>
-            <Shot label="detalhes de interface & componentes" ratio="16/7"   src={gu[3]||null}/>
-            <div className="shots-2">
-              <Shot label="antes / depois"     ratio="4/3.4" src={gu[4]||null}/>
-              <Shot label="sistema de design"  ratio="4/3.4" src={gu[5]||null}/>
-            </div>
+            <Shot label={p.gallery[0]||'imagem 1'} ratio="16/8.5" src={gu[0]||null} hideIfEmpty={gu.length>0}/>
+            <Shot label={p.gallery[1]||'imagem 2'} ratio="4/3.4"  src={gu[1]||null} hideIfEmpty={gu.length>0}/>
+            <Shot label={p.gallery[2]||'imagem 3'} ratio="4/3.4"  src={gu[2]||null} hideIfEmpty={gu.length>0}/>
+            <Shot label="detalhes de interface & componentes" ratio="16/7" src={gu[3]||null} hideIfEmpty={gu.length>0}/>
+            <Shot label="antes / depois"    ratio="4/3.4" src={gu[4]||null} hideIfEmpty={gu.length>0}/>
+            <Shot label="sistema de design" ratio="4/3.4" src={gu[5]||null} hideIfEmpty={gu.length>0}/>
           </div>
         </div>
 

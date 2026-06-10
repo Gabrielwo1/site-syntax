@@ -2,17 +2,17 @@
    CASE STUDY PAGE
    ============================================================ */
 
-/* imagem real (substitui placeholder quando disponível) */
+/* imagem real — altura natural, sem corte */
 .real-shot{
-  position:relative; border-radius:var(--r-lg); overflow:hidden;
+  border-radius:var(--r-lg); overflow:hidden;
   border:1px solid var(--line-soft);
-  background:var(--bg-1);
+  background:var(--bg-1); line-height:0;
 }
 .real-shot img{
-  width:100%; height:100%; object-fit:cover; display:block;
+  width:100%; height:auto; display:block;
   transition:transform .6s var(--ease);
 }
-.real-shot:hover img{ transform:scale(1.02); }
+.real-shot:hover img{ transform:scale(1.015); }
 .case-nav{
   position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:90;
   width:min(calc(100% - 32px), var(--maxw)); display:flex; align-items:center; gap:16px;
