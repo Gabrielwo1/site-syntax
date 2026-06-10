@@ -90,7 +90,10 @@ function ProjectCard({ p, i }){
     <a className={`proj-card reveal d${(i%3)+1}`} href={`case.html?p=${p.slug}`} style={{['--card-accent']:p.accent}}>
       <div className="proj-preview">
         <div className="browser-bar"><i/><i/><i/><span className="url">syntax.studio/{p.slug}</span></div>
-        <div className="mock-wrap"><Mock type={p.mock}/></div>
+        {p.coverUrl
+          ? <div className="mock-wrap cover-wrap"><img src={p.coverUrl} alt={p.title} loading="lazy"/></div>
+          : <div className="mock-wrap"><Mock type={p.mock}/></div>
+        }
       </div>
       <div className="proj-meta">
         <div className="top">
