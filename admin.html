@@ -698,7 +698,8 @@ async function uploadFile(file, path) {
     body: file,
   });
   if (!r.ok) { const e = await r.json(); throw new Error(e.message || r.status); }
-  return storagePublicUrl(path);
+  // timestamp quebra o cache do navegador/CDN ao trocar a imagem
+  return `${storagePublicUrl(path)}?t=${Date.now()}`;
 }
 
 async function uploadImage(event, type, idx) {
