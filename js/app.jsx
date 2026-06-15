@@ -1,4 +1,4 @@
-/* global React, ReactDOM, Hero, Icons, Projects, Manifesto, Clients, Contact, SiteFooter */
+/* global React, ReactDOM, Hero, Icons, Projects, ManifestoCTA, Method, AboutFounder, Clients, SiteFooter */
 const { useState, useEffect } = React;
 
 function Nav(){
@@ -51,13 +51,12 @@ function App(){
       <div className="page-bg"/>
       <Nav/>
       <Hero/>
-      {ready && typeof Projects!=='undefined'      && <Projects/>}
-      {ready && typeof Manifesto!=='undefined'    && <Manifesto/>}
-      {ready && typeof Method!=='undefined'       && <Method/>}
-      {ready && typeof AboutFounder!=='undefined' && <AboutFounder/>}
-      {ready && typeof Clients!=='undefined'      && <Clients/>}
-      {ready && typeof Contact!=='undefined'    && <Contact/>}
-      {ready && typeof SiteFooter!=='undefined' && <SiteFooter/>}
+      {ready && typeof Projects!=='undefined'       && <Projects/>}
+      {ready && typeof Method!=='undefined'        && <Method/>}
+      {ready && typeof AboutFounder!=='undefined'  && <AboutFounder/>}
+      {ready && typeof Clients!=='undefined'       && <Clients/>}
+      {ready && typeof ManifestoCTA!=='undefined'  && <ManifestoCTA/>}
+      {ready && typeof SiteFooter!=='undefined'    && <SiteFooter/>}
       <div className="grain"/>
     </>
   );

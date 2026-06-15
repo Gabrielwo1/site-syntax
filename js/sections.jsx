@@ -194,37 +194,72 @@ function Method(){
   );
 }
 
-function Manifesto(){
+function ManifestoCTA(){
   const principles=[
-    {n:"01",t:"Clareza",d:"Tiramos o ruído. Cada tela responde a uma pergunta e cada interação tem um propósito claro.",
+    {n:"01",t:"Clareza",d:"Cada tela responde a uma pergunta. Cada interação tem um propósito.",
       ic:<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>},
-    {n:"02",t:"Sistema",d:"Desenhamos em componentes, não em telas. Design systems que escalam do protótipo ao produto.",
+    {n:"02",t:"Sistema",d:"Design em componentes que escalam do protótipo ao produto final.",
       ic:<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>},
-    {n:"03",t:"Impacto",d:"Bonito não basta. Medimos cada decisão pelo efeito no negócio e na vida de quem usa.",
+    {n:"03",t:"Impacto",d:"Medimos cada decisão pelo efeito no negócio e na vida de quem usa.",
       ic:<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M3 17l5-5 4 4 8-8M21 8v5M21 8h-5"/></svg>},
   ];
-  const stats=[["8+","anos de estúdio"],["60+","produtos no ar"],["12","países atendidos"],["4,9","NPS médio"]];
+  const stats=[["8+","anos de estúdio"],["60+","produtos no ar"],["12","países atendidos"],["4,9★","NPS médio"]];
   return (
-    <section className="manifesto" id="sobre">
+    <section className="manifesto-cta" id="sobre">
       <div className="wrap">
-        <span className="eyebrow" style={{marginBottom:24,display:'inline-flex'}}>A agência</span>
-        <p className="mani-statement reveal">
-          Somos um estúdio de <span className="hl">UX e product design</span> que transforma sistemas complexos em <span className="hl">experiências simples</span>. <span className="dim">Estratégia, design e código no mesmo time.</span>
-        </p>
-        <div className="principles">
-          {principles.map((p,i)=>(
-            <div className={`principle reveal d${i+1}`} key={p.n}>
-              <div className="pico">{p.ic}</div>
-              <h3>{p.t}</h3>
-              <p>{p.d}</p>
+
+        {/* ── topo: eyebrow + statement ── */}
+        <div className="mc-top reveal">
+          <span className="eyebrow">A agência</span>
+          <h2 className="mc-statement">
+            Somos um estúdio de <span className="hl">UX e product design</span> que transforma sistemas complexos em <span className="hl">experiências simples</span>.
+          </h2>
+          <p className="mc-sub">Estratégia, design e código no mesmo time.</p>
+        </div>
+
+        {/* ── meio: princípios + cta ── */}
+        <div className="mc-body">
+          <div className="mc-principles reveal">
+            {principles.map((p,i)=>(
+              <div className="mc-principle" key={p.n}>
+                <div className="mc-pico">{p.ic}</div>
+                <div>
+                  <h4>{p.t}</h4>
+                  <p>{p.d}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mc-cta-card reveal">
+            <span className="eyebrow" style={{color:'var(--green)'}}>Próximo projeto</span>
+            <h3>Vamos construir algo que move sua marca.</h3>
+            <p>Conte o desafio. Em até 48h respondemos com um diagnóstico inicial — sem compromisso.</p>
+            <div className="mc-cta-actions">
+              <a className="btn btn-primary" href="mailto:ola@syntax.studio">
+                Iniciar conversa
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+              </a>
+              <a className="btn btn-ghost" href="#projetos">Ver projetos</a>
+            </div>
+            <div className="mc-cta-meta">
+              <div><span>E-mail</span><b>ola@syntax.studio</b></div>
+              <div><span>Resposta</span><b>em até 48h</b></div>
+              <div><span>Onde</span><b>Remoto · Brasil</b></div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── rodapé: stats ── */}
+        <div className="mc-stats reveal">
+          {stats.map(([n,l],i)=>(
+            <div className="mc-stat" key={i}>
+              <div className="mc-stat-n">{n}</div>
+              <div className="mc-stat-l">{l}</div>
             </div>
           ))}
         </div>
-        <div className="stats reveal">
-          {stats.map(([n,l],i)=>(
-            <div className="stat" key={i}><div className="num">{n}</div><div className="lbl">{l}</div></div>
-          ))}
-        </div>
+
       </div>
     </section>
   );
@@ -322,28 +357,7 @@ function Clients(){
   );
 }
 
-function Contact(){
-  return (
-    <section className="contact" id="contato">
-      <div className="wrap">
-        <div className="cta-card reveal">
-          <span className="eyebrow">Próximo projeto</span>
-          <h2>Vamos construir algo que move sua marca.</h2>
-          <p>Conte o desafio. Em até 48h respondemos com um diagnóstico inicial e os próximos passos — sem compromisso.</p>
-          <div className="cta-actions">
-            <a className="btn btn-primary" href="mailto:ola@syntax.studio">Iniciar conversa <Icons.arrow/></a>
-            <a className="btn btn-ghost" href="#projetos">Ver projetos</a>
-          </div>
-          <div className="cta-meta">
-            <div>E-mail<b>ola@syntax.studio</b></div>
-            <div>Resposta<b>em até 48h</b></div>
-            <div>Onde<b>Remoto · Brasil</b></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+function Contact(){ return null; }
 
 function SiteFooter(){
   const cols=[
@@ -377,4 +391,4 @@ function SiteFooter(){
   );
 }
 
-Object.assign(window,{ Manifesto, Method, AboutFounder, Clients, Contact, SiteFooter });
+Object.assign(window,{ ManifestoCTA, Method, AboutFounder, Clients, Contact, SiteFooter });
