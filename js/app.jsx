@@ -51,9 +51,10 @@ function App(){
       <div className="page-bg"/>
       <Nav/>
       <Hero/>
-      {ready && typeof Projects!=='undefined'   && <Projects/>}
-      {ready && typeof Manifesto!=='undefined'  && <Manifesto/>}
-      {ready && typeof Clients!=='undefined'    && <Clients/>}
+      {ready && typeof Projects!=='undefined'      && <Projects/>}
+      {ready && typeof Manifesto!=='undefined'    && <Manifesto/>}
+      {ready && typeof AboutFounder!=='undefined' && <AboutFounder/>}
+      {ready && typeof Clients!=='undefined'      && <Clients/>}
       {ready && typeof Contact!=='undefined'    && <Contact/>}
       {ready && typeof SiteFooter!=='undefined' && <SiteFooter/>}
       <div className="grain"/>

@@ -36,18 +36,92 @@ function Manifesto(){
   );
 }
 
+/* ── Sobre o fundador ─────────────────────────────────────── */
+function AboutFounder(){
+  const highlights=[
+    {ic:<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>, v:"7+", l:"anos de experiência"},
+    {ic:<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>, v:"60+", l:"projetos entregues"},
+    {ic:<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>, v:"12", l:"países atendidos"},
+  ];
+  return (
+    <section className="about-founder reveal" id="fundador">
+      <div className="wrap">
+        <div className="af-inner">
+          {/* foto */}
+          <div className="af-photo-wrap">
+            <div className="af-photo">
+              <img src="assets/gabriel.png" alt="Gabriel Oliveira — UX Designer Senior"/>
+              <div className="af-photo-ring"/>
+            </div>
+          </div>
+
+          {/* bio */}
+          <div className="af-bio">
+            <span className="eyebrow">Quem está por trás</span>
+            <h2 className="af-name">Gabriel Oliveira</h2>
+            <p className="af-role">UX Designer Senior · Fundador da SYNTAX</p>
+            <p className="af-text">
+              Com mais de <strong>7 anos desenhando produtos digitais</strong>, ajudei marcas de saúde, fintech, educação e e-commerce a transformar complexidade em experiências que as pessoas realmente usam. Meu trabalho une estratégia, pesquisa e execução visual — do discovery ao handoff.
+            </p>
+            <p className="af-text">
+              Fundei a SYNTAX para reunir num só time tudo que um produto digital precisa: <strong>clareza de UX, sistema de design e entrega de código</strong>. Sem ruído, sem retrabalho.
+            </p>
+            <div className="af-highlights">
+              {highlights.map((h,i)=>(
+                <div className="af-hl" key={i}>
+                  <div className="af-hl-ic">{h.ic}</div>
+                  <div className="af-hl-v">{h.v}</div>
+                  <div className="af-hl-l">{h.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Clientes marquee ─────────────────────────────────────── */
 function Clients(){
-  const names=["Roger","Human Academy","Zouti","Fundsy","Atlas Health","Norte","Sleart","Findas","Primo","Vértice"];
-  const row=[...names,...names];
+  // logos: { name, src } — src aponta para assets/clients/
+  const logos=[
+    { name:"Releva",           src:"assets/clients/releva.png" },
+    { name:"Flakes",           src:"assets/clients/flakes.png" },
+    { name:"Dica de Mestre",   src:"assets/clients/dica-de-mestre.png" },
+    { name:"Hospedagem Brasil",src:"assets/clients/hospedagem-brasil.png" },
+    { name:"Carrefour",        src:"assets/clients/carrefour.png" },
+    { name:"Roger",            src:null },
+    { name:"Human Academy",    src:null },
+    { name:"Zouti",            src:null },
+    { name:"Fundsy",           src:null },
+    { name:"Atlas Health",     src:null },
+  ];
+  const row=[...logos,...logos];
+
   return (
     <section className="clients" id="clientes">
       <p className="lead">Marcas que confiam na SYNTAX</p>
       <div className="marquee">
         <div className="marquee-track">
-          {row.map((n,i)=><span className="client-logo" key={i}><span className="cmark"/>{n}</span>)}
+          {row.map((c,i)=>(
+            <span className="client-logo" key={i}>
+              {c.src
+                ? <img src={c.src} alt={c.name} className="client-img"/>
+                : <><span className="cmark"/>{c.name}</>
+              }
+            </span>
+          ))}
         </div>
         <div className="marquee-track" aria-hidden="true">
-          {row.map((n,i)=><span className="client-logo" key={i}><span className="cmark"/>{n}</span>)}
+          {row.map((c,i)=>(
+            <span className="client-logo" key={i}>
+              {c.src
+                ? <img src={c.src} alt={c.name} className="client-img"/>
+                : <><span className="cmark"/>{c.name}</>
+              }
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -109,4 +183,4 @@ function SiteFooter(){
   );
 }
 
-Object.assign(window,{ Manifesto, Clients, Contact, SiteFooter });
+Object.assign(window,{ Manifesto, AboutFounder, Clients, Contact, SiteFooter });
