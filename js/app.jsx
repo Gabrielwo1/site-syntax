@@ -53,6 +53,7 @@ function App(){
       <Hero/>
       {ready && typeof Projects!=='undefined'      && <Projects/>}
       {ready && typeof Manifesto!=='undefined'    && <Manifesto/>}
+      {ready && typeof Method!=='undefined'       && <Method/>}
       {ready && typeof AboutFounder!=='undefined' && <AboutFounder/>}
       {ready && typeof Clients!=='undefined'      && <Clients/>}
       {ready && typeof Contact!=='undefined'    && <Contact/>}

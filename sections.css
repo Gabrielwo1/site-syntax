@@ -219,3 +219,74 @@ section{ position:relative; z-index:2; }
   padding-top:26px; border-top:1px solid var(--line-soft); font-size:13px; color:var(--faint); }
 .foot-bottom .made{ font-family:var(--font-mono); }
 .foot-bottom .made b{ color:var(--green); font-weight:500; }
+
+/* ============================================================
+   METHOD — DIAMANTE DUPLO
+   ============================================================ */
+.method{ padding:clamp(80px,10vw,140px) 0; position:relative; z-index:2; }
+.dd-wrap{ margin-top:52px; }
+
+.dd-stages{
+  display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+  margin-bottom:12px;
+}
+.dd-stage{
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--faint); padding:6px 14px; border:1px solid var(--line-soft); border-radius:40px;
+}
+.dd-stage svg{ opacity:.5; }
+
+.dd-svg{
+  display:block; width:100%; max-width:900px; margin:0 auto;
+  cursor:default; overflow:visible;
+}
+.dd-seg{ cursor:pointer; transition:fill .25s; }
+.dd-seg:hover{ fill:rgba(63,191,106,.18) !important; }
+.dd-phase-label{ user-select:none; }
+
+/* tabs */
+.dd-tabs{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:2px; margin:20px auto 0; max-width:900px;
+  border:1px solid var(--line-soft); border-radius:14px; overflow:hidden;
+}
+.dd-tab{
+  background:transparent; border:none; cursor:pointer;
+  padding:16px 14px 14px; text-align:left;
+  transition:background .25s; display:flex; flex-direction:column; gap:4px;
+}
+.dd-tab:hover{ background:rgba(255,255,255,.03); }
+.dd-tab.on{ background:rgba(63,191,106,.07); }
+.dd-tab-n{ font-family:var(--font-mono); font-size:10px; color:var(--faint); letter-spacing:.1em; }
+.dd-tab.on .dd-tab-n{ color:var(--green); }
+.dd-tab-label{ font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--fg); }
+.dd-tab.on .dd-tab-label{ color:var(--green); }
+.dd-tab-stage{ font-size:11px; color:var(--faint); font-family:var(--font-mono); }
+
+/* detail card */
+.dd-detail{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:clamp(24px,4vw,52px);
+  margin:28px auto 0; max-width:900px;
+  padding:32px; border:1px solid var(--line-soft); border-radius:16px;
+  background:rgba(255,255,255,.02);
+  animation:ddFade .35s ease;
+}
+@keyframes ddFade{ from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.dd-detail-desc{ color:var(--muted); font-size:15px; line-height:1.65; margin-top:10px; }
+.dd-detail-list{
+  list-style:none; display:flex; flex-direction:column; gap:10px;
+  justify-content:center;
+}
+.dd-detail-list li{
+  display:flex; align-items:center; gap:10px;
+  font-size:14px; color:var(--muted);
+}
+.dd-detail-list li svg{ color:var(--green); flex-shrink:0; }
+
+@media(max-width:640px){
+  .dd-tabs{ grid-template-columns:1fr 1fr; }
+  .dd-detail{ grid-template-columns:1fr; }
+  .dd-stages{ flex-direction:column; align-items:flex-start; }
+}
