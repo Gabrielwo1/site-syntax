@@ -4,8 +4,8 @@
    Fallback para os dados locais se offline
    ============================================================ */
 (function () {
-  const SUPABASE_URL = 'https://thcjrzluhsbgtbirdoxl.supabase.co';
-  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRoY2pyemx1aHNiZ3RiaXJkb3hsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTM1MjcsImV4cCI6MjA4ODkyOTUyN30.DdhrLvq1G0b0MrPkMBr4jP0pkzzM1JVsUBnR9V7s8dU';
+  const SUPABASE_URL = 'https://jnfpulrlnrnuwnbtdbzt.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpuZnB1bHJsbnJudXduYnRkYnp0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NjA2OTksImV4cCI6MjA5ODMzNjY5OX0.B82byMTlkV5Lif4aZrhwnU5bMyBlfxcRW5BwIOMio-g';
 
   // Normaliza row do banco para o formato que os componentes React esperam
   function normalize(row) {
