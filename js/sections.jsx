@@ -236,7 +236,7 @@ function ManifestoCTA(){
             <h3>Vamos construir algo que move sua marca.</h3>
             <p>Conte o desafio. Em até 48h respondemos com um diagnóstico inicial — sem compromisso.</p>
             <div className="mc-cta-actions">
-              <a className="btn btn-primary" href="mailto:ola@syntax.studio">
+              <a className="btn btn-primary" href="https://wa.me/5546999247368" target="_blank" rel="noopener">
                 Iniciar conversa
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
               </a>
