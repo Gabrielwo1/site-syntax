@@ -315,16 +315,16 @@ function AboutFounder(){
 function Clients(){
   // logos: { name, src } — src aponta para assets/clients/
   const logos=[
-    { name:"Releva",           src:"assets/clients/releva.png" },
-    { name:"Flakes",           src:"assets/clients/flakes.png" },
-    { name:"Dica de Mestre",   src:"assets/clients/dica-de-mestre.png" },
-    { name:"Hospedagem Brasil",src:"assets/clients/hospedagem-brasil.png" },
-    { name:"Carrefour",        src:"assets/clients/carrefour.png" },
-    { name:"Roger",            src:null },
-    { name:"Human Academy",    src:null },
-    { name:"Zouti",            src:null },
-    { name:"Fundsy",           src:null },
-    { name:"Atlas Health",     src:null },
+    { name:"Abba Fisioterapia", src:"assets/clients/abba-fisioterapia.png" },
+    { name:"Expro Security",    src:"assets/clients/expro-security.png" },
+    { name:"Hospedagem Brasil", src:"assets/clients/hospedagem-brasil.png" },
+    { name:"Feva",              src:"assets/clients/feva.png" },
+    { name:"Gracie Barra",      src:"assets/clients/gracie-barra.png" },
+    { name:"Dica de Mestre",    src:"assets/clients/dica-de-mestre.png" },
+    { name:"Instituto Mussi",   src:"assets/clients/instituto-mussi.png" },
+    { name:"Distrix Nutrition", src:"assets/clients/distrix.png" },
+    { name:"Don Diego Barber",  src:"assets/clients/don-diego.png" },
+    { name:"Flakes",            src:"assets/clients/flakes.png" },
   ];
   const row=[...logos,...logos];
 
