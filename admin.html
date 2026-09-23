@@ -247,15 +247,13 @@ tr.drag-over td{background:var(--green-soft)!important;}
 <div id="login" style="display:none">
   <div class="login-card">
     <img src="assets/syntax-logo.png" alt="SYNTAX"/>
-    <div><h2>Painel Admin</h2><p>Entre com sua conta para gerenciar os projetos.</p></div>
+    <div><h2>Painel Admin</h2><p>Digite o código de acesso para continuar.</p></div>
     <div id="login-error" class="login-error"></div>
     <div class="field">
-      <label>E-mail</label>
-      <input id="email" type="email" placeholder="seu@email.com" autocomplete="email"/>
-    </div>
-    <div class="field">
-      <label>Senha</label>
-      <input id="password" type="password" placeholder="••••••••" autocomplete="current-password"/>
+      <label>Código de acesso</label>
+      <input id="access-code" type="password" placeholder="••••" maxlength="4"
+        inputmode="numeric" pattern="[0-9]*" autocomplete="off"
+        style="letter-spacing:.35em;font-size:22px;text-align:center;font-family:var(--mono)"/>
     </div>
     <button class="btn btn-primary" id="login-btn" onclick="doLogin()">Entrar</button>
   </div>
@@ -505,7 +503,7 @@ async function sbFetch(path, opts = {}) {
     headers: {
       apikey: SB_ANON,
       'Content-Type': 'application/json',
-      ...(session ? { Authorization: `Bearer ${session.access_token}` } : {}),
+      Authorization: `Bearer ${SB_ANON}`,
       ...opts.headers,
     },
   });
@@ -515,42 +513,29 @@ async function sbFetch(path, opts = {}) {
 }
 
 /* ── auth ────────────────────────────────────────────── */
-async function doLogin() {
-  const email = document.getElementById('email').value.trim();
-  const pass  = document.getElementById('password').value;
-  const btn   = document.getElementById('login-btn');
-  const err   = document.getElementById('login-error');
+const ACCESS_CODE = '4554';
+
+function doLogin() {
+  const code = document.getElementById('access-code').value.trim();
+  const err  = document.getElementById('login-error');
   err.classList.remove('show');
-  btn.disabled = true; btn.textContent = 'Entrando…';
-  try {
-    const data = await sbFetch('/auth/v1/token?grant_type=password', {
-      method: 'POST', body: JSON.stringify({ email, password: pass }),
-    });
-    session = { access_token: data.access_token, user: data.user };
-    localStorage.setItem('syntax_admin_session', JSON.stringify(session));
+  if (code === ACCESS_CODE) {
+    localStorage.setItem('syntax_admin_auth', '1');
     showApp();
-  } catch {
-    err.textContent = 'E-mail ou senha incorretos.';
+  } else {
+    err.textContent = 'Código incorreto.';
     err.classList.add('show');
-  } finally {
-    btn.disabled = false; btn.textContent = 'Entrar';
+    document.getElementById('access-code').value = '';
   }
 }
-async function doLogout() {
-  try { await sbFetch('/auth/v1/logout', { method: 'POST' }); } catch(_){}
-  session = null; localStorage.removeItem('syntax_admin_session'); location.reload();
+function doLogout() {
+  localStorage.removeItem('syntax_admin_auth');
+  location.reload();
 }
-document.getElementById('password').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('access-code').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
 
 (async () => {
-  const stored = localStorage.getItem('syntax_admin_session');
-  if (stored) {
-    try {
-      const s = JSON.parse(stored);
-      const u = await sbFetch('/auth/v1/user', { headers:{ Authorization:`Bearer ${s.access_token}` } });
-      if (u?.id) { session = s; showApp(); return; }
-    } catch(_) { localStorage.removeItem('syntax_admin_session'); }
-  }
+  if (localStorage.getItem('syntax_admin_auth') === '1') { showApp(); return; }
   showLogin();
 })();
 
@@ -561,7 +546,7 @@ function showLogin() {
 function showApp() {
   document.getElementById('login').style.display = 'none';
   document.getElementById('app').style.display   = 'flex';
-  document.getElementById('user-email').textContent = session?.user?.email || '';
+  document.getElementById('user-email').textContent = 'Admin';
   loadProjects();
 }
 
@@ -682,7 +667,7 @@ async function uploadFile(file, path) {
   try {
     await fetch(`${SB_URL}/storage/v1/object/${BUCKET}/${path}`, {
       method: 'DELETE',
-      headers: { apikey: SB_ANON, Authorization: `Bearer ${session.access_token}` },
+      headers: { apikey: SB_ANON, Authorization: `Bearer ${SB_ANON}` },
     });
   } catch(_){}
 
@@ -690,7 +675,7 @@ async function uploadFile(file, path) {
     method: 'POST',
     headers: {
       apikey: SB_ANON,
-      Authorization: `Bearer ${session.access_token}`,
+      Authorization: `Bearer ${SB_ANON}`,
       'Content-Type': file.type,
       'Cache-Control': '3600',
       'x-upsert': 'true',
