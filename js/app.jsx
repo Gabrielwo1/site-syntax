@@ -9,7 +9,6 @@ function Nav(){
     window.addEventListener('scroll',onScroll); return ()=>window.removeEventListener('scroll',onScroll);
   },[]);
   const tools=[['move',Icons.move],['frame',Icons.frame],['pen',Icons.pen],['text',Icons.text],['comp',Icons.comp]];
-  const avatars=[['M','oklch(0.70 0.165 292)'],['T','oklch(0.74 0.155 52)'],['Y','oklch(0.72 0.150 244)']];
   return (
     <nav className="nav" style={scrolled?{top:'10px',boxShadow:'0 20px 55px -22px #000'}:null}>
       <a href="#top"><img className="nav-logo" src="assets/syntax-logo.png" alt="SYNTAX"/></a>
@@ -23,9 +22,6 @@ function Nav(){
         <a className="nav-link" href="#sobre">Sobre</a>
         <a className="nav-link" href="#clientes">Clientes</a>
         <a className="btn btn-primary nav-cta" href="#contato">Vamos conversar</a>
-        <div className="nav-avatars">
-          {avatars.map(([l,c],i)=><span className="nav-av" key={i} style={{background:c}}>{l}</span>)}
-        </div>
       </div>
     </nav>
   );
