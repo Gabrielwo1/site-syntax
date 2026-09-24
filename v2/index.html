@@ -4,22 +4,193 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>SYNTAX — Agência de UX & Product Design</title>
-  <meta name="description" content="Produtos digitais que movem marcas adiante. Design estratégico, interfaces de alto impacto."/>
+  <meta name="description" content="Produtos digitais que movem marcas adiante."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Space+Grotesk:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="v2.css"/>
+  <style>
+    /* ── Hero full-screen ── */
+    .v2-hero{
+      position:relative; width:100%; height:100dvh;
+      overflow:hidden; background:#000;
+      display:flex; align-items:flex-end;
+    }
+
+    /* Slides */
+    .hero-slides{ position:absolute; inset:0; }
+    .hero-slide{
+      position:absolute; inset:0;
+      opacity:0; transition:opacity .7s cubic-bezier(.4,0,.2,1);
+      will-change:opacity;
+    }
+    .hero-slide.active{ opacity:1; }
+    .hero-slide img{
+      width:100%; height:115%; object-fit:cover;
+      transform:translateY(-7.5%);
+      animation:none;
+    }
+    .hero-slide.active img{ animation:kenburns 8s ease-out forwards; }
+    @keyframes kenburns{
+      0%  { transform:translateY(-7.5%) scale(1.04); }
+      100%{ transform:translateY(-7.5%) scale(1); }
+    }
+    /* dark overlay */
+    .hero-overlay{
+      position:absolute; inset:0;
+      background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,.55) 0%,
+        rgba(0,0,0,.15) 40%,
+        rgba(0,0,0,.55) 75%,
+        rgba(0,0,0,.85) 100%
+      );
+    }
+    /* default gradient when no project */
+    .hero-default{
+      position:absolute; inset:0;
+      background:radial-gradient(ellipse 90% 70% at 60% 40%, rgba(63,191,106,.06) 0%, transparent 60%),
+                 radial-gradient(ellipse 60% 50% at 80% 70%, rgba(100,80,200,.05) 0%, transparent 50%);
+      transition:opacity .5s;
+    }
+    .has-active .hero-default{ opacity:0; }
+
+    /* Project list sidebar */
+    .hero-proj-list{
+      position:absolute; left:clamp(20px,3.5vw,52px); top:50%;
+      transform:translateY(-50%);
+      display:flex; flex-direction:column; gap:4px;
+      z-index:10;
+    }
+    .hero-proj-btn{
+      display:inline-flex; align-items:center; gap:10px;
+      font-family:var(--sans); font-size:clamp(13px,1.1vw,15px); font-weight:400;
+      color:rgba(240,237,232,.55);
+      background:rgba(255,255,255,.07); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:40px; padding:7px 16px 7px 12px;
+      cursor:none; user-select:none;
+      transition:color .25s, background .25s, border-color .25s, transform .2s;
+      white-space:nowrap;
+    }
+    .hero-proj-btn .dot{
+      width:7px; height:7px; border-radius:50%;
+      background:transparent; border:1px solid rgba(255,255,255,.25);
+      transition:background .25s, border-color .25s;
+      flex-shrink:0;
+    }
+    .hero-proj-btn:hover,
+    .hero-proj-btn.active{
+      color:var(--fg);
+      background:rgba(255,255,255,.13);
+      border-color:rgba(255,255,255,.2);
+    }
+    .hero-proj-btn.active .dot{
+      background:var(--green); border-color:var(--green);
+    }
+    .hero-proj-btn.all-work{
+      margin-top:8px; color:rgba(240,237,232,.35);
+      background:transparent; border-color:rgba(255,255,255,.06);
+    }
+    .hero-proj-btn.all-work:hover{ color:var(--fg); background:rgba(255,255,255,.07); }
+
+    /* Hero description — top right */
+    .hero-desc{
+      position:absolute; right:clamp(20px,3.5vw,52px); top:clamp(100px,12vh,140px);
+      width:clamp(200px,22vw,320px); z-index:10;
+      opacity:0; transform:translateY(6px);
+      transition:opacity .4s, transform .4s;
+    }
+    .has-active .hero-desc{ opacity:1; transform:none; }
+    .hero-desc p{
+      font-size:clamp(13px,1.1vw,15px); color:rgba(240,237,232,.7);
+      line-height:1.65;
+    }
+    .hero-desc .hero-desc-tags{
+      display:flex; flex-wrap:wrap; gap:5px; margin-top:12px;
+    }
+    .hero-desc .hero-desc-tag{
+      font-family:var(--mono); font-size:10px; letter-spacing:.06em;
+      border:1px solid rgba(255,255,255,.12); border-radius:40px;
+      padding:3px 9px; color:rgba(240,237,232,.45);
+    }
+
+    /* Hero bottom: title + meta */
+    .hero-bottom{
+      position:relative; z-index:10;
+      width:100%; padding:0 clamp(20px,3.5vw,52px) clamp(32px,4vw,52px);
+      display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
+    }
+    .hero-title-wrap{ flex:1; overflow:hidden; }
+    .hero-big-title{
+      font-family:var(--serif);
+      font-size:clamp(44px,7.5vw,112px);
+      font-weight:400; line-height:1.0; letter-spacing:-.025em;
+      color:var(--fg);
+      display:flex; flex-direction:column;
+    }
+    /* default title */
+    .hero-title-default{
+      transition:opacity .4s, transform .4s;
+    }
+    .has-active .hero-title-default{
+      opacity:0; transform:translateY(-8px); pointer-events:none; position:absolute;
+    }
+    /* project title (revealed on hover) */
+    .hero-title-proj{
+      opacity:0; transform:translateY(12px);
+      transition:opacity .45s .05s, transform .45s .05s;
+      pointer-events:none;
+    }
+    .has-active .hero-title-proj{
+      opacity:1; transform:none;
+    }
+
+    .hero-bottom-right{
+      display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+      padding-bottom:6px;
+    }
+    .hero-cta-link{
+      display:inline-flex; align-items:center; gap:8px;
+      font-family:var(--mono); font-size:11px; letter-spacing:.1em;
+      text-transform:uppercase; color:rgba(240,237,232,.5);
+      border:1px solid rgba(255,255,255,.12); border-radius:40px;
+      padding:8px 16px;
+      transition:color .2s, border-color .2s;
+    }
+    .hero-cta-link:hover{ color:var(--fg); border-color:rgba(255,255,255,.3); }
+
+    /* Nav on top of hero */
+    .v2-nav{
+      position:fixed; top:0; left:0; right:0; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:clamp(18px,2.5vw,28px) clamp(20px,3.5vw,52px);
+    }
+
+    /* Mobile: stack differently */
+    @media(max-width:700px){
+      .hero-proj-list{
+        position:static; transform:none;
+        flex-direction:row; flex-wrap:wrap;
+        gap:6px; order:-1;
+        padding:clamp(80px,15vw,110px) clamp(16px,4vw,24px) 0;
+        align-self:flex-start; width:100%;
+      }
+      .v2-hero{ flex-direction:column; align-items:stretch; }
+      .hero-bottom{ flex-direction:column; align-items:flex-start; }
+      .hero-desc{ position:static; width:auto; opacity:1 !important; transform:none !important; margin-top:8px; }
+      .has-active .hero-desc{ opacity:1; transform:none; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
 <div id="cursor"></div>
-<!-- Page wipe -->
 <div id="wipe"></div>
 
 <!-- ── Nav ──────────────────────────────────────── -->
 <nav class="v2-nav">
-  <a href="#top" class="v2-nav-logo">
+  <a href="#" class="v2-nav-logo">
     <img src="../assets/syntax-logo.png" alt="SYNTAX"/>
   </a>
   <div class="v2-nav-right">
@@ -34,23 +205,20 @@
 <!-- ── Menu overlay ─────────────────────────────── -->
 <div id="menu-overlay">
   <div class="menu-top">
-    <a href="#top" class="v2-nav-logo" style="mix-blend-mode:normal">
+    <a href="#" class="v2-nav-logo" style="mix-blend-mode:normal">
       <img src="../assets/syntax-logo.png" alt="SYNTAX"/>
     </a>
     <button class="menu-close" id="menu-close">FECHAR ✕</button>
   </div>
   <nav class="menu-links">
-    <a href="#projetos" onclick="document.getElementById('menu-overlay').classList.remove('open')">
-      Projetos <span>01</span>
-    </a>
-    <a href="#manifesto" onclick="document.getElementById('menu-overlay').classList.remove('open')">
-      Manifesto <span>02</span>
-    </a>
     <a href="https://wa.me/5546999247368" target="_blank" rel="noopener">
-      Iniciar projeto <span>03</span>
+      Iniciar projeto <span>01</span>
+    </a>
+    <a href="mailto:gabriel@uxsyntax.com.br">
+      Contato <span>02</span>
     </a>
     <a href="../admin.html" data-wipe>
-      Admin <span>04</span>
+      Admin <span>03</span>
     </a>
   </nav>
   <div class="menu-bottom">
@@ -60,45 +228,45 @@
 </div>
 
 <!-- ── Hero ─────────────────────────────────────── -->
-<header class="v2-hero" id="top">
-  <div class="v2-hero-bg"></div>
-  <div class="v2-hero-content">
-    <p class="v2-hero-eyebrow">Agência de UX · Product Design · Foz do Iguaçu</p>
-    <h1 class="v2-hero-title">
-      Design que<br/>
-      <em>move marcas</em><br/>
-      adiante.
-    </h1>
-    <div class="v2-hero-bottom">
-      <div class="v2-hero-tags">
-        <span class="v2-hero-tag">UX Strategy</span>
-        <span class="v2-hero-tag">Product Design</span>
-        <span class="v2-hero-tag">UI Systems</span>
-        <span class="v2-hero-tag">Web</span>
+<header class="v2-hero" id="hero">
+
+  <!-- Image slides -->
+  <div class="hero-slides" id="hero-slides"></div>
+  <div class="hero-default"></div>
+  <div class="hero-overlay"></div>
+
+  <!-- Project list (left) -->
+  <div class="hero-proj-list" id="proj-list">
+    <!-- populated by JS -->
+  </div>
+
+  <!-- Description (top right) -->
+  <div class="hero-desc" id="hero-desc">
+    <p id="hero-desc-text"></p>
+    <div class="hero-desc-tags" id="hero-desc-tags"></div>
+  </div>
+
+  <!-- Bottom: title + CTA -->
+  <div class="hero-bottom">
+    <div class="hero-title-wrap">
+      <div class="hero-big-title">
+        <span class="hero-title-default">
+          Design que<br/><em style="color:rgba(240,237,232,.45)">move marcas</em><br/>adiante.
+        </span>
+        <span class="hero-title-proj" id="hero-title-proj"></span>
       </div>
-      <div class="v2-hero-scroll">
-        Scroll
-      </div>
+    </div>
+    <div class="hero-bottom-right">
+      <a class="hero-cta-link" href="https://wa.me/5546999247368" target="_blank" rel="noopener">
+        Iniciar projeto
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </header>
 
-<!-- ── Projects ─────────────────────────────────── -->
-<section class="v2-projects" id="projetos">
-  <div class="v2-projects-head">
-    <h2>Trabalhos selecionados</h2>
-    <span class="v2-projects-count" id="proj-count">—</span>
-  </div>
-  <div id="proj-list">
-    <!-- populated by JS -->
-    <div class="v2-proj-item v2-reveal" style="border-top:1px solid var(--line);padding:60px clamp(20px,5vw,80px);opacity:.3">
-      <p style="font-family:var(--mono);font-size:11px;letter-spacing:.1em">Carregando projetos…</p>
-    </div>
-  </div>
-</section>
-
 <!-- ── Manifesto ─────────────────────────────────── -->
-<section class="v2-manifesto v2-reveal" id="manifesto">
+<section class="v2-manifesto v2-reveal">
   <p class="v2-manifesto-text">
     Acreditamos que design não é decoração —
     é <em>estratégia visível.</em>
@@ -128,6 +296,104 @@
 </footer>
 
 <script src="js/v2-db.js"></script>
+<script>
+(async function(){
+  const hero       = document.getElementById('hero');
+  const slideWrap  = document.getElementById('hero-slides');
+  const projList   = document.getElementById('proj-list');
+  const heroTitle  = document.getElementById('hero-title-proj');
+  const heroDesc   = document.getElementById('hero-desc-text');
+  const heroTags   = document.getElementById('hero-desc-tags');
+
+  if(typeof window.__v2db === 'undefined') return;
+  const projects = await window.__v2db.fetchProjects();
+  if(!projects.length) return;
+
+  let activeIdx = -1;
+  let leaveTimer = null;
+
+  // Build slides
+  projects.forEach((p, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'hero-slide';
+    if(p.cover_url){
+      const img = document.createElement('img');
+      img.src = p.cover_url;
+      img.alt = '';
+      img.loading = i === 0 ? 'eager' : 'lazy';
+      slide.appendChild(img);
+    }
+    slideWrap.appendChild(slide);
+  });
+
+  const slides = slideWrap.querySelectorAll('.hero-slide');
+
+  function activate(idx){
+    if(activeIdx === idx) return;
+    clearTimeout(leaveTimer);
+
+    // deactivate old
+    if(activeIdx >= 0) slides[activeIdx]?.classList.remove('active');
+
+    activeIdx = idx;
+
+    if(idx < 0){
+      hero.classList.remove('has-active');
+      return;
+    }
+
+    slides[idx]?.classList.add('active');
+    hero.classList.add('has-active');
+
+    const p = projects[idx];
+    const cleanTitle = (p.title||'').replace(/^SITE\s*-\s*/i,'').replace(/^APP\s*-\s*/i,'');
+    heroTitle.textContent  = cleanTitle;
+    heroDesc.textContent   = p.summary || p.subtitle || '';
+    heroTags.innerHTML = (p.tags||[]).slice(0,4)
+      .map(t=>`<span class="hero-desc-tag">${t.replace(/^#/,'')}</span>`).join('');
+
+    // mark active btn
+    projList.querySelectorAll('.hero-proj-btn[data-idx]').forEach(b => {
+      b.classList.toggle('active', +b.dataset.idx === idx);
+    });
+  }
+
+  function deactivateDelayed(){
+    leaveTimer = setTimeout(()=> activate(-1), 220);
+  }
+
+  // Build project buttons
+  projects.forEach((p, i) => {
+    const cleanTitle = (p.title||'').replace(/^SITE\s*-\s*/i,'').replace(/^APP\s*-\s*/i,'');
+    const btn = document.createElement('button');
+    btn.className = 'hero-proj-btn';
+    btn.dataset.idx = i;
+    btn.innerHTML = `<span class="dot"></span>${cleanTitle}`;
+    btn.addEventListener('mouseenter', () => activate(i));
+    btn.addEventListener('mouseleave', deactivateDelayed);
+    btn.addEventListener('click', () => {
+      const slug = p.slug || p.id;
+      navigateTo(`case.html?s=${encodeURIComponent(slug)}`);
+    });
+    projList.appendChild(btn);
+  });
+
+  // "All Work" button
+  const allBtn = document.createElement('button');
+  allBtn.className = 'hero-proj-btn all-work';
+  allBtn.innerHTML = `<span class="dot"></span>Todos os projetos`;
+  allBtn.addEventListener('click', () => {
+    document.querySelector('.v2-manifesto')?.scrollIntoView({ behavior:'smooth' });
+  });
+  projList.appendChild(allBtn);
+
+  // keep active while hovering hero desc or slides
+  [slideWrap, document.getElementById('hero-desc')].forEach(el => {
+    el?.addEventListener('mouseenter', () => clearTimeout(leaveTimer));
+    el?.addEventListener('mouseleave', deactivateDelayed);
+  });
+})();
+</script>
 <script src="js/v2-app.js"></script>
 </body>
 </html>
