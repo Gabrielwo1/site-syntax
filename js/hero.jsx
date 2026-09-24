@@ -189,7 +189,6 @@ function Hero(){
           </div>
         </Panel>
 
-        <MultiCursors/>
       </div>
 
       {/* headline as selected text layer */}
