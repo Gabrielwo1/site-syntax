@@ -134,7 +134,7 @@ async function loadProjects(){
   });
 }
 
-loadProjects();
+// loadProjects() is called only on pages that have #proj-list
 
 /* ── Horizontal drag scroll ────────────────────────────── */
 document.querySelectorAll('.case-gallery-h').forEach(el=>{
