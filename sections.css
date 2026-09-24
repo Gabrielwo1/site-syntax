@@ -15,7 +15,7 @@ section{ position:relative; z-index:2; }
 .projects{ padding:clamp(90px,12vw,150px) 0 clamp(60px,8vw,110px); }
 .proj-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,2vw,26px); }
 @media(max-width:1080px){ .proj-grid{ grid-template-columns:repeat(2,1fr); } }
-@media(max-width:680px){ .proj-grid{ grid-template-columns:1fr; } }
+@media(max-width:680px){ .proj-grid{ grid-template-columns:repeat(2,1fr); gap:12px; } }
 
 .proj-card{
   position:relative; display:flex; flex-direction:column; border-radius:var(--r-lg); overflow:hidden;
