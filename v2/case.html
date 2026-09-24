@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Case — SYNTAX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="v2.css"/>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="wipe"></div>
+
+<!-- ── Nav ──────────────────────────────────────── -->
+<nav class="v2-nav">
+  <a href="index.html" class="v2-nav-logo" data-wipe>
+    <img src="../assets/syntax-logo.png" alt="SYNTAX"/>
+  </a>
+  <div class="v2-nav-right">
+    <a href="mailto:gabriel@uxsyntax.com.br" class="v2-nav-link">Contato</a>
+    <button class="v2-menu-btn" id="menu-btn" aria-label="Menu">
+      <span><i></i><i></i></span>
+      MENU
+    </button>
+  </div>
+</nav>
+
+<!-- ── Menu overlay ─────────────────────────────── -->
+<div id="menu-overlay">
+  <div class="menu-top">
+    <a href="index.html" class="v2-nav-logo" style="mix-blend-mode:normal" data-wipe>
+      <img src="../assets/syntax-logo.png" alt="SYNTAX"/>
+    </a>
+    <button class="menu-close" id="menu-close">FECHAR ✕</button>
+  </div>
+  <nav class="menu-links">
+    <a href="index.html#projetos" data-wipe>Projetos <span>01</span></a>
+    <a href="index.html#manifesto" data-wipe>Manifesto <span>02</span></a>
+    <a href="https://wa.me/5546999247368" target="_blank" rel="noopener">Iniciar projeto <span>03</span></a>
+  </nav>
+  <div class="menu-bottom">
+    <p>© 2025 SYNTAX. Todos os direitos reservados.</p>
+    <a href="mailto:gabriel@uxsyntax.com.br">gabriel@uxsyntax.com.br</a>
+  </div>
+</div>
+
+<!-- ── Case content ──────────────────────────────── -->
+<div id="case-content">
+
+  <!-- Hero -->
+  <header class="case-hero">
+    <div class="case-hero-meta">
+      <span id="case-client"></span>
+      <span id="case-category"></span>
+      <span id="case-year"></span>
+    </div>
+    <h1 class="case-hero-title" id="case-title">Carregando…</h1>
+    <p class="case-hero-sub" id="case-sub"></p>
+  </header>
+
+  <!-- Cover image with parallax -->
+  <div class="case-cover" data-parallax-wrap>
+    <img id="case-cover-img" src="" alt="" data-parallax="0.4"/>
+  </div>
+
+  <!-- Body -->
+  <div class="case-body">
+
+    <a class="case-back v2-reveal" href="index.html" data-wipe>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 18l-6-6 6-6"/></svg>
+      Voltar aos projetos
+    </a>
+
+    <!-- Specs grid -->
+    <dl class="case-specs v2-reveal" id="case-specs"></dl>
+
+    <!-- Intro text -->
+    <div class="case-intro v2-reveal">
+      <p class="case-intro-label">Sobre o projeto</p>
+      <p class="case-intro-text" id="case-intro-text"></p>
+    </div>
+
+    <!-- Horizontal gallery -->
+    <div class="case-gallery-h" id="case-gallery-h"></div>
+
+    <!-- Vertical shots -->
+    <div id="case-shots"></div>
+
+    <!-- CTA -->
+    <div style="padding:clamp(60px,8vw,120px) 0 0; display:flex; flex-direction:column; gap:24px;">
+      <p style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Próximo passo</p>
+      <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,56px);font-weight:400;letter-spacing:-.02em;max-width:640px">Pronto para criar algo assim para a sua marca?</h2>
+      <a class="v2-cta-btn" href="https://wa.me/5546999247368" target="_blank" rel="noopener" data-cursor style="margin-top:8px">
+        Falar no WhatsApp
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Footer ────────────────────────────────────── -->
+<footer class="v2-foot">
+  <p>© 2025 SYNTAX UX Agency · Foz do Iguaçu, PR</p>
+  <div class="v2-foot-links">
+    <a href="mailto:gabriel@uxsyntax.com.br">Email</a>
+    <a href="https://wa.me/5546999247368" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="index.html" data-wipe>Projetos</a>
+  </div>
+</footer>
+
+<script src="js/v2-db.js"></script>
+<script src="js/v2-app.js"></script>
+<script src="js/v2-case.js"></script>
+</body>
+</html>

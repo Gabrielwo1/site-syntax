@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SYNTAX — Agência de UX & Product Design</title>
+  <meta name="description" content="Produtos digitais que movem marcas adiante. Design estratégico, interfaces de alto impacto."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="v2.css"/>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<!-- Page wipe -->
+<div id="wipe"></div>
+
+<!-- ── Nav ──────────────────────────────────────── -->
+<nav class="v2-nav">
+  <a href="#top" class="v2-nav-logo">
+    <img src="../assets/syntax-logo.png" alt="SYNTAX"/>
+  </a>
+  <div class="v2-nav-right">
+    <a href="mailto:gabriel@uxsyntax.com.br" class="v2-nav-link">Contato</a>
+    <button class="v2-menu-btn" id="menu-btn" aria-label="Menu">
+      <span><i></i><i></i></span>
+      MENU
+    </button>
+  </div>
+</nav>
+
+<!-- ── Menu overlay ─────────────────────────────── -->
+<div id="menu-overlay">
+  <div class="menu-top">
+    <a href="#top" class="v2-nav-logo" style="mix-blend-mode:normal">
+      <img src="../assets/syntax-logo.png" alt="SYNTAX"/>
+    </a>
+    <button class="menu-close" id="menu-close">FECHAR ✕</button>
+  </div>
+  <nav class="menu-links">
+    <a href="#projetos" onclick="document.getElementById('menu-overlay').classList.remove('open')">
+      Projetos <span>01</span>
+    </a>
+    <a href="#manifesto" onclick="document.getElementById('menu-overlay').classList.remove('open')">
+      Manifesto <span>02</span>
+    </a>
+    <a href="https://wa.me/5546999247368" target="_blank" rel="noopener">
+      Iniciar projeto <span>03</span>
+    </a>
+    <a href="../admin.html" data-wipe>
+      Admin <span>04</span>
+    </a>
+  </nav>
+  <div class="menu-bottom">
+    <p>© 2025 SYNTAX. Todos os direitos reservados.</p>
+    <a href="mailto:gabriel@uxsyntax.com.br">gabriel@uxsyntax.com.br</a>
+  </div>
+</div>
+
+<!-- ── Hero ─────────────────────────────────────── -->
+<header class="v2-hero" id="top">
+  <div class="v2-hero-bg"></div>
+  <div class="v2-hero-content">
+    <p class="v2-hero-eyebrow">Agência de UX · Product Design · Foz do Iguaçu</p>
+    <h1 class="v2-hero-title">
+      Design que<br/>
+      <em>move marcas</em><br/>
+      adiante.
+    </h1>
+    <div class="v2-hero-bottom">
+      <div class="v2-hero-tags">
+        <span class="v2-hero-tag">UX Strategy</span>
+        <span class="v2-hero-tag">Product Design</span>
+        <span class="v2-hero-tag">UI Systems</span>
+        <span class="v2-hero-tag">Web</span>
+      </div>
+      <div class="v2-hero-scroll">
+        Scroll
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Projects ─────────────────────────────────── -->
+<section class="v2-projects" id="projetos">
+  <div class="v2-projects-head">
+    <h2>Trabalhos selecionados</h2>
+    <span class="v2-projects-count" id="proj-count">—</span>
+  </div>
+  <div id="proj-list">
+    <!-- populated by JS -->
+    <div class="v2-proj-item v2-reveal" style="border-top:1px solid var(--line);padding:60px clamp(20px,5vw,80px);opacity:.3">
+      <p style="font-family:var(--mono);font-size:11px;letter-spacing:.1em">Carregando projetos…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Manifesto ─────────────────────────────────── -->
+<section class="v2-manifesto v2-reveal" id="manifesto">
+  <p class="v2-manifesto-text">
+    Acreditamos que design não é decoração —
+    é <em>estratégia visível.</em>
+    Cada pixel carrega intenção. Cada fluxo,
+    uma decisão de negócio.
+  </p>
+</section>
+
+<!-- ── CTA ──────────────────────────────────────── -->
+<section class="v2-cta v2-reveal">
+  <p class="v2-cta-eyebrow">Pronto para começar?</p>
+  <h2 class="v2-cta-title">Vamos construir algo juntos.</h2>
+  <a class="v2-cta-btn" href="https://wa.me/5546999247368" target="_blank" rel="noopener" data-cursor>
+    Falar no WhatsApp
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </a>
+</section>
+
+<!-- ── Footer ────────────────────────────────────── -->
+<footer class="v2-foot">
+  <p>© 2025 SYNTAX UX Agency · Foz do Iguaçu, PR</p>
+  <div class="v2-foot-links">
+    <a href="mailto:gabriel@uxsyntax.com.br">Email</a>
+    <a href="https://wa.me/5546999247368" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="../index.html" data-wipe>Versão clássica</a>
+  </div>
+</footer>
+
+<script src="js/v2-db.js"></script>
+<script src="js/v2-app.js"></script>
+</body>
+</html>
