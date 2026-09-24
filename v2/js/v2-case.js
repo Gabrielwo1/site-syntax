@@ -14,90 +14,81 @@ async function loadCase(){
     return;
   }
 
-  document.title = `${p.title || p.client} — SYNTAX`;
+  const cleanTitle = (p.title||'').replace(/^SITE\s*-\s*/i,'').replace(/^APP\s*-\s*/i,'');
+  document.title = `${cleanTitle} — SYNTAX`;
 
-  // hero
-  document.getElementById('case-client').textContent  = p.client || '';
-  document.getElementById('case-category').textContent = (p.tags||[]).join(' · ') || '';
-  document.getElementById('case-year').textContent    = p.year || '';
-  document.getElementById('case-title').textContent   = p.title || p.client || '';
-  document.getElementById('case-sub').textContent     = p.short_desc || p.description || '';
+  document.getElementById('case-client').textContent   = cleanTitle;
+  document.getElementById('case-category').textContent = (p.tags||[]).map(t=>t.replace(/^#/,'')).join(' · ');
+  document.getElementById('case-year').textContent     = p.year || '';
+  document.getElementById('case-title').textContent    = cleanTitle;
+  document.getElementById('case-sub').textContent      = p.subtitle || p.summary || '';
 
-  // cover
-  if(p.cover_image){
+  // cover — já é URL completa
+  if(p.cover_url){
     const ci = document.getElementById('case-cover-img');
-    if(ci) ci.src = window.__v2db.imgUrl(p.cover_image);
+    if(ci){ ci.src = p.cover_url; ci.alt = cleanTitle; }
   }
 
   // specs
   const specs = [
-    ['Cliente',   p.client   || '—'],
+    ['Cliente',   p.subtitle || cleanTitle],
     ['Ano',       p.year     || '—'],
-    ['Categoria', (p.tags||[]).join(', ') || '—'],
-    ['Plataforma', p.platform || '—'],
+    ['Serviço',   p.role     || '—'],
+    ['Duração',   p.duration || '—'],
   ];
   const specWrap = document.getElementById('case-specs');
-  if(specWrap){
-    specWrap.innerHTML = specs.map(([k,v]) =>
-      `<div class="case-spec"><dt>${k}</dt><dd>${v}</dd></div>`
-    ).join('');
-  }
+  if(specWrap)
+    specWrap.innerHTML = specs.map(([k,v])=>`<div class="case-spec"><dt>${k}</dt><dd>${v}</dd></div>`).join('');
 
-  // intro text
+  // intro
   const introEl = document.getElementById('case-intro-text');
-  if(introEl) introEl.textContent = p.description || '';
+  if(introEl) introEl.textContent = p.summary || p.subtitle || '';
 
-  // gallery images
-  const gallery = p.gallery_images || [];
+  // gallery_urls — já URLs completas
+  const gallery = p.gallery_urls || [];
   const galleryH = document.getElementById('case-gallery-h');
+
   if(galleryH && gallery.length){
-    galleryH.innerHTML = gallery.map(img =>
+    galleryH.innerHTML = gallery.map(url=>
       `<div class="case-gallery-h-item">
-        <img src="${window.__v2db.imgUrl(img)}" alt="" loading="lazy"/>
+        <img src="${url}" alt="" loading="lazy"/>
       </div>`
     ).join('');
 
-    // drag scroll
     let down=false, sx=0, sl=0;
-    galleryH.addEventListener('mousedown',  e => { down=true; sx=e.pageX-galleryH.offsetLeft; sl=galleryH.scrollLeft; });
-    galleryH.addEventListener('mouseleave', () => down=false);
-    galleryH.addEventListener('mouseup',    () => down=false);
-    galleryH.addEventListener('mousemove',  e => {
-      if(!down) return; e.preventDefault();
-      galleryH.scrollLeft = sl - (e.pageX - galleryH.offsetLeft - sx);
-    });
+    galleryH.addEventListener('mousedown',  e=>{ down=true; sx=e.pageX-galleryH.offsetLeft; sl=galleryH.scrollLeft; });
+    galleryH.addEventListener('mouseleave', ()=>down=false);
+    galleryH.addEventListener('mouseup',    ()=>down=false);
+    galleryH.addEventListener('mousemove',  e=>{ if(!down) return; e.preventDefault(); galleryH.scrollLeft=sl-(e.pageX-galleryH.offsetLeft-sx); });
   } else if(galleryH){
-    galleryH.style.display = 'none';
+    galleryH.style.display='none';
   }
 
-  // shots (remaining gallery as vertical shots)
+  // vertical shots (a partir do 4º)
   const shotsWrap = document.getElementById('case-shots');
   if(shotsWrap && gallery.length > 3){
-    shotsWrap.innerHTML = gallery.slice(3).map(img =>
+    shotsWrap.innerHTML = gallery.slice(3).map(url=>
       `<div class="case-shot" data-parallax-wrap>
-        <img src="${window.__v2db.imgUrl(img)}" alt="" loading="lazy" data-parallax="0.4"/>
+        <img src="${url}" alt="" loading="lazy" data-parallax="0.4"/>
       </div>`
     ).join('');
   }
 
   // reveal
-  document.querySelectorAll('.v2-reveal').forEach(el => {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold:0.08 });
-    io.observe(el);
-  });
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.08 });
+  document.querySelectorAll('.v2-reveal').forEach(el=>io.observe(el));
 
   // parallax
-  const imgs = document.querySelectorAll('[data-parallax]');
-  if(imgs.length && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const pImgs = document.querySelectorAll('[data-parallax]');
+  if(pImgs.length && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
     function update(){
-      imgs.forEach(img => {
+      pImgs.forEach(img=>{
         const wrap = img.closest('[data-parallax-wrap]');
         const rect = (wrap||img).getBoundingClientRect();
-        const vy   = window.innerHeight;
-        const pct  = (vy/2 - (rect.top + rect.height/2)) / (vy + rect.height);
-        img.style.transform = `translateY(${pct * 80 * parseFloat(img.dataset.parallax||'1')}px)`;
+        const pct  = (window.innerHeight/2-(rect.top+rect.height/2))/(window.innerHeight+rect.height);
+        img.style.transform = `translateY(${pct*80*parseFloat(img.dataset.parallax||'1')}px)`;
       });
     }
     window.addEventListener('scroll', update, { passive:true });
