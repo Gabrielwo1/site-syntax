@@ -1,4 +1,4 @@
-/* global React, ReactDOM, Hero, Icons, Projects, ManifestoCTA, Method, AboutFounder, Clients, SiteFooter */
+/* global React, ReactDOM, Hero, Icons, Projects, ManifestoCTA, Method, AboutFounder, Clients, SiteFooter, Toolkit */
 const { useState, useEffect } = React;
 
 function Nav(){
@@ -49,6 +49,7 @@ function App(){
       <Hero/>
       {ready && typeof Projects!=='undefined'       && <Projects/>}
       {ready && typeof Method!=='undefined'        && <Method/>}
+      {ready && typeof Toolkit!=='undefined'       && <Toolkit/>}
       {ready && typeof AboutFounder!=='undefined'  && <AboutFounder/>}
       {ready && typeof Clients!=='undefined'       && <Clients/>}
       {ready && typeof ManifestoCTA!=='undefined'  && <ManifestoCTA/>}
