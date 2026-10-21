@@ -202,7 +202,7 @@ function Hero(){
         <p className="hero-sub">A SYNTAX desenha sites, apps e dashboards para marcas que querem clareza. Transformamos sistemas complexos em experiências simples, consistentes e de alto impacto.</p>
         <div className="hero-actions">
           <a className="btn btn-primary" href="#projetos">Ver projetos <I.arrow/></a>
-          <a className="btn btn-ghost" href="#contato"><I.play style={{width:13,height:13}}/> Iniciar um projeto</a>
+          <a className="btn btn-ghost" href="https://wa.me/5546999247368" target="_blank" rel="noopener"><I.play style={{width:13,height:13}}/> Iniciar um projeto</a>
         </div>
       </div>
 
